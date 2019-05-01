@@ -8,6 +8,7 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { ProductComponent } from './Pages/product/product.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { SignupComponent } from './Pages/signup/signup.component';
+import { AddProductComponent } from './Pages/add-product/add-product.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './Components/componentsModule';
@@ -57,7 +58,11 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'products/:key', component: ProductComponent },
+  { path: 'products', children: [
+    { path: '', component: HomeComponent },
+    { path: 'add', component: AddProductComponent } ,
+    { path: ':key', component: ProductComponent } ,
+  ] },
   {
     path: 'user/:id',
     component: ProfileComponent
@@ -70,7 +75,7 @@ const appRoutes: Routes = [
     path: 'signup',
     component: SignupComponent
   },
-  { path: '**', component: HomeComponent }
+  { path: '**', component: HomeComponent },
 ];
 @NgModule({
   declarations: [
@@ -79,7 +84,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     ProductComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

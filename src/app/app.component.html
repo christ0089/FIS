@@ -24,6 +24,6 @@
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
-<button *ngIf="authService.isLoggedIn" mat-fab class="add-item" color="accent">
+<button *ngIf="authService.isLoggedIn && !router.url.includes('products/add')" mat-fab class="add-item" [routerLink]="['/products/add']" color="accent">
   <mat-icon class="add fab-icon">add</mat-icon>
 </button>
