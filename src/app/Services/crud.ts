@@ -15,7 +15,6 @@ export class ContentProvider {
     private db: FirebaseApp) {
   }
 
-
   updateContent(path, data) {
     const firebaseDb = this.db.database().ref().child(path);
     return new Promise((res, rej) => {

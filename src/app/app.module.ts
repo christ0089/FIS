@@ -39,33 +39,34 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatMenuModule,
-  MatToolbarModule,
+  MatToolbarModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule} from '@angular/fire/database';
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyDAGR7GFSd4YbDuO66JAr3IWerlqklgRkc',
-  authDomain: 'teclink-8e19c.firebaseapp.com',
-  databaseURL: 'https://teclink-8e19c.firebaseio.com',
-  projectId: 'teclink-8e19c',
-  storageBucket: 'teclink-8e19c.appspot.com',
-  messagingSenderId: '147182383690'
+  apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
+  authDomain: 'soft-eng-d42c8.firebaseapp.com',
+  databaseURL: 'https://soft-eng-d42c8.firebaseio.com',
+  projectId: 'soft-eng-d42c8',
+  storageBucket: 'soft-eng-d42c8.appspot.com',
+  messagingSenderId: '299889855672'
 };
 
 const appRoutes: Routes = [
-  { path: 'product/:id',    component: ProductComponent },
+  { path: 'product/:id', component: ProductComponent },
   {
     path: 'user/:id',
-    component: ProfileComponent,
+    component: ProfileComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'signup',
-    component: SignupComponent,
+    component: SignupComponent
   },
   { path: '**', component: HomeComponent }
 ];
@@ -82,15 +83,14 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     MatBadgeModule,
     ComponentsModule,
     MatBottomSheetModule,
     MatButtonModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    RouterModule.forRoot(
-      appRoutes,
-    ),
+    RouterModule.forRoot(appRoutes),
     MatCardModule,
     MatIconModule,
     MatCheckboxModule,
@@ -114,9 +114,9 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

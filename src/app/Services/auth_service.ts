@@ -4,38 +4,48 @@ import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-    private user: firebase.User;
-    constructor(public afAuth: AngularFireAuth) {
+  isLoggedIn = false;
+  displayName = '';
 
-    }
+  constructor(
+    public afAuth: AngularFireAuth
+  ) {
+    this.getUserData().subscribe(user => {
+      if (user && user.uid) {
+        this.displayName = user.displayName;
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  }
 
-    getUserID() {
-        return this.user;
-    }
+  getUserData() {
+    return this.afAuth.user;
+  }
 
-    getUserStatus() {
-        return this.afAuth.authState;
-    }
+  logIn(credentials) {
+    return this.afAuth.auth.signInWithEmailAndPassword(
+      credentials.email,
+      credentials.password
+    );
+  }
 
-    signIn(credentials) {
-        return new Promise((sucess, error) => {
-            this.afAuth.auth.signInWithEmailAndPassword(credentials.Email, credentials.Password).then((success) => {
-                this.user = this.afAuth.auth.currentUser;
-                return success;
-            }).catch((_err: Error) => {
-                return error(_err);
-            });
-        });
-    }
+  signUp = async ({ email, password, firstName, lastName }) => {
+    await this.afAuth.auth.createUserWithEmailAndPassword(
+      email,
+      password
+    );
+    this.displayName = `${firstName} ${lastName}`;
+    await this.afAuth.auth.currentUser.updateProfile({
+      displayName: this.displayName,
+      photoURL: ''
+    });
+  }
 
-    signOut() {
-        return new Promise((resolve, error) => {
-            this.afAuth.auth.signOut().then((success) => {
-                return resolve('Success');
-            }).catch((error) => {
-                return error('Reject');
-            });
-        });
-    }
+  logOut() {
+    return this.afAuth.auth.signOut();
+  }
 }

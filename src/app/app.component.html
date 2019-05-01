@@ -1,23 +1,29 @@
-<mat-toolbar color="primary">
-  <span [routerLink]="['/']">
-  <img src="../assets/logo-white.png" class="logo" alt="Logo"></span>
+<mat-toolbar class="fix" color="primary">
+  <a [routerLink]="['/']">
+    <img src="../assets/logo-white.png" class="logo" alt="Logo">
+  </a>
   <span style="flex: 1 1 auto;"></span>
-  <mat-icon *ngIf="!isLoggedIn" [routerLink]="['/login']">account_circle</mat-icon>
+  <button mat-button *ngIf="!authService.isLoggedIn" [routerLink]="['/login']">
+    Login
+    <mat-icon class="icon">account_circle</mat-icon>
+  </button>
 
-  <div *ngIf="isLoggedIn">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
+  <div *ngIf="authService.isLoggedIn">
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{ authService.displayName }}
+      <mat-icon class="icon">account_circle</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item disabled>
-        {{ fullName() }}
+        Bienvenido
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="logOut()">
         Cerrar sesión
       </button>
     </mat-menu>
   </div>
-
-
 </mat-toolbar>
 <router-outlet></router-outlet>
+<button *ngIf="authService.isLoggedIn" mat-fab class="add-item" color="accent">
+  <mat-icon class="add fab-icon">add</mat-icon>
+</button>

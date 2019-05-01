@@ -1,5 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../Services/auth_service';
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+
+function validateMail(control: FormControl) {
+  if (
+    !control.value.includes('@itesm.mx') &&
+    !control.value.includes('@tec.mx')
+  ) {
+    return { invalidEmail: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-signup',
@@ -7,32 +24,42 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  signupForm: FormGroup;
 
-  singupForm: FormGroup;
+  constructor(
+    private authService: AuthService,
+    public snackbar: MatSnackBar,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
-    this.singupForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      email: new FormControl(null, [
+    this.signupForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [
         Validators.required,
-        Validators.email
+        Validators.email,
+        validateMail
       ]),
-      password: new FormControl(null, Validators.required),
-      password2: new FormControl(null, Validators.required)
+      password: new FormControl('', Validators.required),
+      password2: new FormControl('', Validators.required)
     });
   }
 
-  onSubmit() {
-    const { firstName, lastName, email, password, password2 } = this.singupForm.value;
-    // if (this.singupForm.valid && password === password2) {
-    //   const user = new User(email, password, firstName, lastName);
-    //   this.authService.signup(user)
-    //     .subscribe(
-    //       this.authService.login,
-    //       this.authService.handleError,
-    //     );
-    // }
+  onSubmit = async () => {
+    const userData = this.signupForm.value;
+    const { password, password2 } = userData;
+      if (this.signupForm.valid) {
+        if (password === password2) {
+          try {
+            await this.authService.signUp(userData);
+            this.router.navigate(['/']);
+          } catch (err) {
+            this.snackbar.open(err, 'Cerrar', { duration: 2500 });
+          }
+        } else {
+          this.snackbar.open('Las contraseñas no coinciden', 'Cerrar', { duration: 2500 });
+        }
+      }
   }
-
 }

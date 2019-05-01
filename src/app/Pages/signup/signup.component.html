@@ -3,7 +3,7 @@
     <img src="../../../assets/logo-original.png" alt="logo" class="logo">
   </a>
 
-  <form [formGroup]="singupForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <input matInput placeholder="Nombre" formControlName="firstName" id="firstName">
     </mat-form-field>
@@ -11,7 +11,10 @@
       <input matInput placeholder="Apellido" formControlName="lastName" id="lastName">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Correo electrónico" formControlName="email" id="email">
+      <input matInput placeholder="Correo electrónico" formControlName="email" id="email" />
+      <mat-error *ngIf="!signupForm.get('email').hasError('required') && signupForm.get('email').hasError('invalidEmail')">
+        El email debe contener <strong>@itesm.mx o @tec.mx</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input type="password" matInput placeholder="Contraseña" formControlName="password" id="password">
@@ -19,8 +22,7 @@
     <mat-form-field>
       <input type="password" matInput placeholder="Repita la contraseña" formControlName="password2" id="password2">
     </mat-form-field>
-    <button type="submit" mat-raised-button color="accent"
-      onclick="if (password.value !== password2.value){alert('Las contraseñas no coinciden'); }">Crear cuenta</button>
-    <a mat-button color="primary" class="auth-change" [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
+    <button type="submit" mat-raised-button color="primary">Crear cuenta</button>
+    <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
   </form>
 </mat-card>

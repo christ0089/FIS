@@ -1,5 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { AuthService } from '../../Services/auth_service';
+
+function validateMail(control: FormControl) {
+  if (
+    !control.value.includes('@itesm.mx') &&
+    !control.value.includes('@tec.mx')
+  ) {
+    return { invalidEmail: true };
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-auth',
@@ -11,27 +24,33 @@ export class LoginComponent implements OnInit {
 
   authForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    public snackbar: MatSnackBar,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.authForm = new FormGroup({
-      email: new FormControl(null, [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
+        validateMail
       ]),
-      password: new FormControl(null, Validators.required)
+      password: new FormControl('', Validators.required)
     });
   }
 
-  onSubmit() {
+  onSubmit = async () => {
     if (this.authForm.valid) {
-      const { email, password } = this.authForm.value;
-      // const user = new User(email, password, null, null);
-      // this.authService.signin(user)
-      //   .subscribe(
-      //     this.authService.login,
-      //     this.authService.handleError,
-      //   );
+      try {
+        const credentials = this.authForm.value;
+        await this.authService.logIn(credentials);
+        this.router.navigate(['/']);
+        this.snackbar.open('Bienvenido de nuevo', 'Cerrar', { duration: 2500 });
+      } catch (err) {
+        this.snackbar.open(err, 'Cerrar', { duration: 2500 });
+      }
     }
   }
 }
