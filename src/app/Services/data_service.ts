@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { AngularFireList, AngularFireObject, AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable()
-export class ResultProvider {
+export class DataProvider {
   constructor(public http: HttpClient, private db: AngularFireDatabase) {
 
   }

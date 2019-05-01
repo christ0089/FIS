@@ -1,10 +1,10 @@
 import { UserTypes } from "../Enums/UserTypes";
 
-export interface User {
-    email: string;
-    profileImg: string;
-    name: string;
-    coverImg: string;
-    userType: UserTypes,
-    uid: string;
+export interface IUser {
+    _email: string;
+    _profileImg: string;
+    _name: string;
+    _coverImg: string;
+    _userType: UserTypes,
+    _uid: string;
 }

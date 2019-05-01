@@ -1,15 +1,15 @@
-import { Product } from "../Models/Product";
+import { IProduct } from "../Models/Product";
 
 export class Cart implements Cart {
 
-    private _products: Product[];
+    private _products: IProduct[];
     private _total: number;
     private _uid: string;
 
     constructor () {
         
     }
-    setProducts(product: Product[]) {
+    setProducts(product: IProduct[]) {
         this._products = product;
     }
 
@@ -21,7 +21,7 @@ export class Cart implements Cart {
         this._uid = uid;
     }
 
-    getProducts(product: Product[]) {
+    getProducts(product: IProduct[]) {
         return this._products;
     }
 

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FirebaseApp } from '@angular/fire';
-import { UserInfoService } from './UserInfo/user-info.service';
 
 /*
   Generated class for the ContentProvider provider.

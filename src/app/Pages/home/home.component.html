@@ -20,15 +20,8 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="../Membership">Volverme Miembro</button>
-  <mat-divider></mat-divider>
-  <button mat-menu-item routerLink="../Marcadores">Mis Marcadores</button>
-  <button mat-menu-item routerLink="../articleWrite">Nueva Historia</button>
-  <mat-divider></mat-divider>
-  <button mat-menu-item routerLink="../PartnerProgram">Techlink Partner</button>
-  <mat-divider></mat-divider>
   <button mat-menu-item (click)="goToPage('Perfil', user_service.userID)">Perfil</button>
-  <button mat-menu-item>Ayuda</button>
+  <mat-divider></mat-divider>
   <button mat-menu-item (click)=signOut()>Salir</button>
 </mat-menu>
 
@@ -48,9 +41,4 @@
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-  <mat-grid-tile>3</mat-grid-tile>
-  <mat-grid-tile>4</mat-grid-tile>
-  <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>6</mat-grid-tile>
 </mat-grid-list>

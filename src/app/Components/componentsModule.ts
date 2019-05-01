@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatInputModule, MatDividerModule, MatMenuModule, MatToolbarModule, MatDialogModule, MatListModule, MatTabsModule, MatCard, MatCardModule } from '@angular/material';
-import { ResultProvider } from '../Services/mapService';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -30,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     ],
     exports: [
     ],
-    providers: [ ResultProvider],
+    providers: [ ],
     entryComponents: []
 })
 export class ComponentsModule { }

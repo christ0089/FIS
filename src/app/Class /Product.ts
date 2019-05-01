@@ -1,6 +1,6 @@
-import { Product } from "../Models/Product";
+import { IProduct } from "../Models/Product";
 
-export class Cart implements Cart {
+export class Product implements IProduct {
 
     _name: string;
     _price: number;

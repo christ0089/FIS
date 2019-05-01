@@ -1,13 +1,19 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import {auth}  from 'firebase';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
     private user: firebase.User;
-    constructor(public afAuth: AngularFireAuth, private snackBar: MatSnackBar) {
+    constructor(public afAuth: AngularFireAuth) {
 
+    }
+
+    getUserID() {
+        return this.user;
+    }
+
+    getUserStatus() {
+        return this.afAuth.authState;
     }
 
     signIn(credentials) {
@@ -20,7 +26,6 @@ export class AuthService {
             })
         })
     }
-
 
     signOut() {
         return new Promise((resolve, error) => {
