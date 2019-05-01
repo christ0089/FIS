@@ -17,6 +17,9 @@
       <button mat-menu-item disabled>
         Bienvenido
       </button>
+      <button mat-menu-item [routerLink]="['/chats']">
+        Conversaciones
+      </button>
       <button mat-menu-item (click)="logOut()">
         Cerrar sesión
       </button>

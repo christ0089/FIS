@@ -9,6 +9,7 @@ import { ProductComponent } from './Pages/product/product.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { AddProductComponent } from './Pages/add-product/add-product.component';
+import { ChatsComponent } from './Pages/chats/chats.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './Components/componentsModule';
@@ -40,7 +41,8 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatMenuModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatListModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -72,6 +74,10 @@ const appRoutes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'chats',
+    component: ChatsComponent
+  },
+  {
     path: 'signup',
     component: SignupComponent
   },
@@ -85,7 +91,8 @@ const appRoutes: Routes = [
     ProductComponent,
     LoginComponent,
     SignupComponent,
-    AddProductComponent
+    AddProductComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +103,7 @@ const appRoutes: Routes = [
     ComponentsModule,
     MatBottomSheetModule,
     MatButtonModule,
+    MatListModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
     RouterModule.forRoot(appRoutes),
@@ -122,7 +130,7 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [DataProvider,AuthService],
   bootstrap: [AppComponent]

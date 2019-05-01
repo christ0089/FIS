@@ -1,0 +1,61 @@
+.container {
+  height: calc(100vh - 64px);
+}
+
+.sidebar {
+  width: 20%;
+}
+
+.message {
+  width: 60%;
+  display: flex;
+  height: 100% !important;
+  margin: 10px 0;
+}
+
+.left {
+  margin-right: auto;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.message .mat-list-item-content {
+  display: flex;
+}
+
+.left > .mat-list-item-content {
+  justify-content: flex-start;
+}
+
+.right > .mat-list-item-content {
+  justify-content: flex-end;
+}
+
+.message-data {
+  padding: 10px 20px;
+  background: #2196f3;
+  border-radius: 15px;
+  font-size: 12px;
+  color: white;
+}
+
+.message-input {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.message-input-container {
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  width: 80%;
+  display: flex;
+}
+
+@media (max-width: 36em) {
+  .container {
+    height: calc(100vh - 56px);
+  }
+}
