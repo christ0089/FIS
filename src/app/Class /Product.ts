@@ -1,42 +1,57 @@
-import { IProduct } from '../Models/Product';
+import { IProduct } from "../Models/Product";
+import { User } from "./User";
 
 export class Product implements IProduct {
 
-    _name: string;
-    _price: number;
-    _coverImg: string;
-    _uid: string;
+    name: string;
+    price: number;
+    coverImg: string;
+    uid: string;
+    owner: string;
+    user: User;
+    constructor() {
 
-    constructor () {}
-
+    }
     setPrice(price: number) {
-        this._price = price;
+        this.price = price;
     }
 
     setName(name: string) {
-        this._name = name;
+        this.name = name;
     }
 
     setCoverImg(coverImg: string) {
-        this._coverImg = coverImg;
+        this.coverImg = coverImg;
     }
     setUID(uid: string) {
-        this._uid = uid;
+        this.uid = uid;
+    }
+
+    setUser(user: User) {
+        this.user = user;
     }
 
     getPrice() {
-        return this._price;
+        return this.price;
     }
 
-    getName() {
-        return this._name;
+    getName(): string {
+        return this.name;
     }
 
-    getCoverImg() {
-        return this._coverImg;
+    getCoverImg(): string {
+        return this.coverImg;
     }
-    getUID() {
-        return this._uid;
+    getUID(): string {
+        return this.uid;
+    }
+
+    getOwner(): string {
+        return this.owner;
+    }
+
+    getUser(user: User) {
+        return user;
     }
 
 }

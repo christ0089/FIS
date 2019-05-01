@@ -1,15 +1,17 @@
-import { IProduct } from '../Models/Product';
+
+import { Product } from "./Product";
 
 export class Cart implements Cart {
 
-    private _products: IProduct[];
+    private products: Product[];
     private _total: number;
     private _uid: string;
 
-    constructor () {}
-
-    setProducts(product: IProduct[]) {
-        this._products = product;
+    constructor () {
+        
+    }
+    setProducts(product: Product[]) {
+       this.products = product;
     }
 
     setTotal(total: number) {
@@ -20,23 +22,25 @@ export class Cart implements Cart {
         this._uid = uid;
     }
 
-    getProducts() {
-        return this._products;
+    getProducts(product: Product[]) {
+        return this.products;
     }
 
     getTotal() {
         return this._total;
     }
 
-    getUID() {
+    getUID(uid: string) {
         return this._uid;
     }
 
     Total() {
         let total = 0;
-        return this._products.forEach(product => {
-            total += product._price;
+        return this.products.forEach(product => {
+            total += product.price;
         });
     }
+
+
 
 }
