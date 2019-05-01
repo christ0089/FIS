@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfoService } from 'src/app/Services/user_service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   categories = ["Juegos", "Golf"];
-  constructor() { }
+  constructor(private user: UserInfoService) { }
 
   ngOnInit() {
+    this.user.getCurrentSession();
+  }
+
+  ngOnDestroy() {
+
   }
 
 }

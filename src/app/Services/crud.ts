@@ -9,7 +9,7 @@ import { FirebaseApp } from '@angular/fire';
   and Angular DI.
 */
 @Injectable()
-export class ContentProvider {
+export class CrudProvider {
 
   constructor(public http: HttpClient,
     private db: FirebaseApp) {
