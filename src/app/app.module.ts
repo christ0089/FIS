@@ -42,7 +42,8 @@ import {
   MatSnackBarModule,
   MatMenuModule,
   MatToolbarModule,
-  MatListModule
+  MatListModule,
+  MatTabsModule
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -117,6 +118,7 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatTabsModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatToolbarModule,
