@@ -1,3 +1,42 @@
-<p>
-  home works!
-</p>
+<div>
+  <mat-toolbar class="nav-barMain">
+    <div class="titleNavMain">Tercera Mano</div>
+    <div class="userImg" >
+      <div [matMenuTriggerFor]="menu">
+      
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="../Membership">Volverme Miembro</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="../Marcadores">Mis Marcadores</button>
+        <button mat-menu-item routerLink="../articleWrite">Nueva Historia</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="../PartnerProgram">Techlink Partner</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="goToPage('Perfil', user_service.userID)">Perfil</button>
+        <button mat-menu-item>Ayuda</button>
+        <button mat-menu-item (click)=signOut()>Salir</button>
+      </mat-menu>
+    </div>
+    
+    <ng-template #loading>
+      <div id="logButtons">
+        <button mat-button class="logButton" (click)="openLogDialog()">Iniciar Sesión</button>
+        <button mat-button (click)="openRegDialog()">Empezar</button>
+      </div>
+    </ng-template>
+    <mat-toolbar-row>
+      <div>
+        <span>HOME</span>
+        <span *ngFor="let cat of categories" (click)="goToPage(cat)">{{cat}}</span>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  
+</div>
+
+

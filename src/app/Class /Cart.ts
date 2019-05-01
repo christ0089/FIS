@@ -1,5 +1,4 @@
 import { Product } from "../Models/Product";
-import { get } from "https";
 
 export class Cart implements Cart {
 
@@ -20,7 +19,6 @@ export class Cart implements Cart {
     }
 
     Total() {
-        return 
     }
 
 }

@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   AngularFirestoreCollection,
   DocumentChangeAction,
 
-} from "@angular/fire/firestore";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { AngularFireList, AngularFireObject, AngularFireDatabase } from "@angular/fire/database";
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AngularFireList, AngularFireObject, AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable()
 export class ResultProvider {

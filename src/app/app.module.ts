@@ -6,6 +6,10 @@ import { HomeComponent } from './Pages/home/home.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ProductComponent } from './Pages/product/product.component';
 
+import { RouterModule, Routes } from '@angular/router';
+
+import { ComponentsModule } from './Components/componentsModule';
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -31,8 +35,28 @@ import {
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
+  MatMenuModule,
+  MatToolbarModule,
 } from '@angular/material';
+import { AngularFireModule } from '@angular/fire';
 
+export const firebaseConfig = {
+  apiKey: 'AIzaSyDAGR7GFSd4YbDuO66JAr3IWerlqklgRkc',
+  authDomain: 'teclink-8e19c.firebaseapp.com',
+  databaseURL: 'https://teclink-8e19c.firebaseio.com',
+  projectId: 'teclink-8e19c',
+  storageBucket: 'teclink-8e19c.appspot.com',
+  messagingSenderId: '147182383690'
+};
+
+const appRoutes: Routes = [
+  { path: '**', component: HomeComponent },
+  { path: 'product/:id',    component: ProductComponent },
+  {
+    path: 'user/:id',
+    component: ProfileComponent,
+  }
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,18 +65,20 @@ import {
     ProductComponent
   ],
   imports: [
-    BrowserModule
-    MatAutocompleteModule,
+    BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     MatBadgeModule,
+    ComponentsModule,
     MatBottomSheetModule,
     MatButtonModule,
     MatButtonToggleModule,
+    RouterModule.forRoot(
+      appRoutes,
+    ),
     MatCardModule,
+    MatIconModule,
     MatCheckboxModule,
     MatChipsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CdkTableModule,
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
@@ -61,8 +87,10 @@ import {
     MatInputModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    MatToolbarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
+    MatMenuModule,
     MatRippleModule,
     MatSelectModule,
     MatSidenavModule,

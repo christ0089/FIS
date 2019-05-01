@@ -1,11 +1,10 @@
 import { Product } from "../Models/Product";
-import { get } from "https";
 
 export class Cart implements Cart {
 
     _products: Product[];
-    _total : number;
-    _uid : string;
+    _total: number;
+    _uid: string;
 
     setProducts(product: Product[]) {
         this._products = product;
