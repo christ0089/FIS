@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../Services/product_service';
+import { ProductService } from '../../Services/productService';
 import { Product } from '../../Class /Product';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { CurrencyPipe} from '@angular/common';
+import { CartService } from 'src/app/Services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +12,24 @@ import { Product } from '../../Class /Product';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products:any = [];
+  products$:Observable<Product[]>;
 
   constructor(
-    public productService: ProductService
+    public productService: ProductService,
+    private router: Router
   ) {
-    productService.getProducts().subscribe(products => {
-      this.products = products;
-    });
+    this.products$ = productService.getProducts();
   }
 
   ngOnInit() {
+  }
+
+  goToPage(page, params?) {
+    console.log(params)
+    if (params != null) {
+      this.router.navigate([page, JSON.stringify(params)]);
+      return;
+    }
+    this.router.navigate([page]);
   }
 }

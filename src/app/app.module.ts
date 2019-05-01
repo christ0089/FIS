@@ -83,9 +83,9 @@ const appRoutes: Routes = [
     HomeComponent,
     ProfileComponent,
     ProductComponent,
+    AddProductComponent,
     LoginComponent,
     SignupComponent,
-    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +98,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'}),
     MatCardModule,
     MatIconModule,
     MatCheckboxModule,

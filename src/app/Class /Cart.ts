@@ -3,44 +3,53 @@ import { Product } from "./Product";
 
 export class Cart implements Cart {
 
-    private products: Product[];
-    private _total: number;
+    private products: Product[] = [];
+    total = 0;
     private _uid: string;
 
-    constructor () {
-        
-    }
     setProducts(product: Product[]) {
        this.products = product;
     }
 
     setTotal(total: number) {
-        this._total = total;
+        this.total = total;
     }
 
     setUID(uid: string) {
         this._uid = uid;
     }
 
-    getProducts(product: Product[]) {
+    getProducts() {
         return this.products;
     }
 
     getTotal() {
-        return this._total;
+        return this.total;
     }
 
     getUID(uid: string) {
         return this._uid;
     }
 
-    Total() {
-        let total = 0;
-        return this.products.forEach(product => {
-            total += product.price;
-        });
+    calcTotal() {
+        this.total = this.products.reduce((total, product) => total + product.price, 0);
     }
 
+    getCartItems() {
+        return this.products.length;
+    }
+
+
+    addProduct(product: Product) {
+        console.log(product);
+        this.products.push(product);
+        this.calcTotal();
+    }
+
+
+    removeProduct(product: Product) {
+        this.products.slice(this.products.indexOf(product), 1);
+    }
 
 
 }

@@ -15,6 +15,10 @@ img {
     background-color: green;
     color: white;
 }
+.cart_header
+{
+    overflow: scroll;
+}
 .example-full-width {
     display: block;
     width: 100%;
@@ -29,6 +33,11 @@ mat-grid-tile {
         width: 100%;
         flex: 1 1;
     }
+}
+
+.title {
+    font-family: 'Roboto';
+    padding: 15px;
 }
 
 app-product {
