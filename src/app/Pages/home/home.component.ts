@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../Services/product_service';
+import { Product } from '../../Class /Product';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -6,12 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  categories = ['Juegos', 'Golf'];
-  constructor() { }
+  products:Product[] = [];
 
-  ngOnInit() {
+  constructor(
+    public productService: ProductService
+  ) {
 
   }
 
-
+  ngOnInit() {
+  }
 }

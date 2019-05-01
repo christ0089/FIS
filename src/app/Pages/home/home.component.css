@@ -1,13 +1,14 @@
-.example-icon {
-    padding: 0 14px;
-  }
-  
-  .example-spacer {
-    flex: 1 1 auto;
-  }
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1rem 1rem;
+  padding: 30px;
+}
 
-  .menu-list {
-    span {
-       margin-right: 10px;
-    }
-  }
+.container:first-child {
+  margin-left: 0;
+}
+
+.product {
+  max-width: 300px;
+}
