@@ -1,39 +1,55 @@
-<div>
-  <mat-toolbar class="nav-barMain">
-    <div class="titleNavMain">Tercera Mano</div>
-    <div class="userImg" >
-      <div [matMenuTriggerFor]="menu">
-      
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </div>
-
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="../Membership">Volverme Miembro</button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="../Marcadores">Mis Marcadores</button>
-        <button mat-menu-item routerLink="../articleWrite">Nueva Historia</button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="../PartnerProgram">Techlink Partner</button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="goToPage('Perfil', user_service.userID)">Perfil</button>
-        <button mat-menu-item>Ayuda</button>
-        <button mat-menu-item (click)=signOut()>Salir</button>
-      </mat-menu>
-    </div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Tercera Mano</span>
+    <span class="example-spacer"></span>
+    <div mat-card-avatar class="example-header-image"></div>
+    <button  mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+   
     
-    <ng-template #loading>
-      <div id="logButtons">
-        <button mat-button class="logButton" (click)="openLogDialog()">Iniciar Sesión</button>
-        <button mat-button (click)="openRegDialog()">Empezar</button>
-      </div>
-    </ng-template>
-    <mat-toolbar-row>
-      <div>
-        <span>HOME</span>
-        <span *ngFor="let cat of categories" (click)="goToPage(cat)">{{cat}}</span>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row >
+    <div class="menu-list">
+      <span>Home</span>
+      <span *ngFor="let cat of categories" (click)="goToPage(cat)">{{cat}}</span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="../Membership">Volverme Miembro</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item routerLink="../Marcadores">Mis Marcadores</button>
+  <button mat-menu-item routerLink="../articleWrite">Nueva Historia</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item routerLink="../PartnerProgram">Techlink Partner</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="goToPage('Perfil', user_service.userID)">Perfil</button>
+  <button mat-menu-item>Ayuda</button>
+  <button mat-menu-item (click)=signOut()>Salir</button>
+</mat-menu>
 
 
+<mat-grid-list cols="6" rowHeight="1:1.5" style="margin: 15px 50px">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>5</mat-grid-tile>
+  <mat-grid-tile>6</mat-grid-tile>
+</mat-grid-list>

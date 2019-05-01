@@ -34,9 +34,9 @@ export class Cart implements Cart {
     }
 
     Total() {
-        let total:number = 0;
+        let total = 0;
         return this._products.forEach(product => {
-            total += product.Price;
+            total += product.price;
         });
     }
 

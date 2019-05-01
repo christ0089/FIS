@@ -1,7 +1,7 @@
 import { Product } from './Product';
 
 export interface Cart {
-    Products: Product[];
-    Total: Number;
+    products: Product[];
+    total: Number;
     uid: string;
 }

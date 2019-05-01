@@ -1,8 +1,10 @@
+import { UserTypes } from "../Enums/UserTypes";
 
 export interface User {
-    Email: string;
-    ProfileImg: string;
-    Name: string;
-    CoverImg: string;
+    email: string;
+    profileImg: string;
+    name: string;
+    coverImg: string;
+    userType: UserTypes,
     uid: string;
 }

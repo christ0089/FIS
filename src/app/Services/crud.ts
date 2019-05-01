@@ -13,57 +13,32 @@ import { UserInfoService } from './UserInfo/user-info.service';
 export class ContentProvider {
 
   constructor(public http: HttpClient,
-    private db: FirebaseApp,
-    private userProvider: UserInfoService, ) {
+    private db: FirebaseApp) {
   }
 
-  postComment(path, key, data) {
-    const firebaseDb = this.db.database().ref().child(path).child("Comments").child(key);
+
+  updateContent(path, data) {
+    const firebaseDb = this.db.database().ref().child(path);
     return new Promise((res, rej) => {
-        firebaseDb.push(data).then(() => {
-          return res("Success");
-        })
+      return firebaseDb.update(data).catch((error) => {
+        return rej(error);
+      });
     })
   }
 
-  postData(path, data) {
-    if (this.userProvider.userData == null) {
-      return;
-    }
-    this.postLike(path, data).then(() => {
-      //   this.toastCtrl.presentToast("Thanks for supporting this author");
-    }).catch((error) => {
-      //  this.toastCtrl.presentErrorAlert(error);
-    })
-  }
-
-  setData(path, data) {
-    const firebaseDb = this.db.database().ref().child(path)
+  pushContent(path, data) {
+    const firebaseDb = this.db.database().ref().child(path);
     return new Promise((res, rej) => {
-      firebaseDb.push(data)
-    })
-  }
-
-  postLike(path, data) {
-    const firebaseDb = this.db.database().ref().child(path)
-    return new Promise((res, rej) => {
-      firebaseDb.update(data)
-        .catch((error) => {
-          //  this.toastCtrl.presentErrorAlert(error);
-        })
+      return firebaseDb.push(data);
     })
   }
 
   removeContent(path) {
-    const firebaseDb = this.db.database().ref().child(path)
+    const firebaseDb = this.db.database().ref().child(path);
     return new Promise((res, rej) => {
-      firebaseDb.remove()
-        .then(() => {
-          return res("Sucess");
-        })
-        .catch((error) => {
-          return rej(error);
-        })
+      return firebaseDb.remove().catch((error) => {
+        return rej(error);
+      });
     })
   }
 

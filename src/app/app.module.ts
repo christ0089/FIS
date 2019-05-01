@@ -9,6 +9,7 @@ import { ProductComponent } from './Pages/product/product.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './Components/componentsModule';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   MatAutocompleteModule,
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     ComponentsModule,
     MatBottomSheetModule,
     MatButtonModule,
+    BrowserAnimationsModule,
     MatButtonToggleModule,
     RouterModule.forRoot(
       appRoutes,
