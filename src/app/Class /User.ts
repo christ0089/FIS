@@ -1,3 +1,6 @@
+
+
+
 export class User implements User {
     private _email: string;
     private _profileImg: string;
@@ -5,8 +8,9 @@ export class User implements User {
     private _coverImg: string;
     private _uid: string;
 
-    constructor () {}
-
+    constructor () {
+        
+    }
     setEmail(email: string) {
         this._email = email;
     }
@@ -26,22 +30,22 @@ export class User implements User {
         this._uid = uid;
     }
 
-    getEmail() {
+    getEmail(email: string) {
         return this._email;
     }
 
-    getProfileImg() {
+    getProfileImg(profileImg: string) {
         return this._profileImg;
     }
 
-    getName() {
+    getName(name: string) {
         return this._name;
     }
 
-    getCoverImg() {
+    getCoverImg(coverImg: string) {
         return this._coverImg;
     }
-    getUID() {
+    getUID(uid: string) {
         return this._uid;
     }
 

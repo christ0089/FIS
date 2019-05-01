@@ -44,6 +44,8 @@ import {
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule} from '@angular/fire/database';
+import { DataProvider } from './Services/dataService';
+import { AuthService } from './Services/auth_service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
@@ -55,7 +57,7 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'product/:id', component: ProductComponent },
+  { path: 'products/:key', component: ProductComponent },
   {
     path: 'user/:id',
     component: ProfileComponent
@@ -116,7 +118,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DataProvider,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
