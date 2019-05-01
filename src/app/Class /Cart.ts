@@ -1,4 +1,4 @@
-import { IProduct } from "../Models/Product";
+import { IProduct } from '../Models/Product';
 
 export class Cart implements Cart {
 
@@ -6,9 +6,8 @@ export class Cart implements Cart {
     private _total: number;
     private _uid: string;
 
-    constructor () {
-        
-    }
+    constructor () {}
+
     setProducts(product: IProduct[]) {
         this._products = product;
     }
@@ -21,7 +20,7 @@ export class Cart implements Cart {
         this._uid = uid;
     }
 
-    getProducts(product: IProduct[]) {
+    getProducts() {
         return this._products;
     }
 
@@ -29,14 +28,14 @@ export class Cart implements Cart {
         return this._total;
     }
 
-    getUID(uid: string) {
+    getUID() {
         return this._uid;
     }
 
     Total() {
         let total = 0;
         return this._products.forEach(product => {
-            total += product.price;
+            total += product._price;
         });
     }
 

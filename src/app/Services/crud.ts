@@ -22,14 +22,14 @@ export class ContentProvider {
       return firebaseDb.update(data).catch((error) => {
         return rej(error);
       });
-    })
+    });
   }
 
   pushContent(path, data) {
     const firebaseDb = this.db.database().ref().child(path);
     return new Promise((res, rej) => {
       return firebaseDb.push(data);
-    })
+    });
   }
 
   removeContent(path) {
@@ -38,7 +38,7 @@ export class ContentProvider {
       return firebaseDb.remove().catch((error) => {
         return rej(error);
       });
-    })
+    });
   }
 
 }

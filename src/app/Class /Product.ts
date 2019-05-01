@@ -1,4 +1,4 @@
-import { IProduct } from "../Models/Product";
+import { IProduct } from '../Models/Product';
 
 export class Product implements IProduct {
 
@@ -7,9 +7,8 @@ export class Product implements IProduct {
     _coverImg: string;
     _uid: string;
 
-    constructor () {
-        
-    }
+    constructor () {}
+
     setPrice(price: number) {
         this._price = price;
     }
@@ -29,14 +28,14 @@ export class Product implements IProduct {
         return this._price;
     }
 
-    getName(name: string) {
+    getName() {
         return this._name;
     }
 
-    getCoverImg(coverImg: string) {
+    getCoverImg() {
         return this._coverImg;
     }
-    getUID(uid: string) {
+    getUID() {
         return this._uid;
     }
 

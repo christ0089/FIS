@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   AngularFirestoreCollection,
-  DocumentChangeAction,
-
+  DocumentChangeAction
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,9 +10,7 @@ import { AngularFireList, AngularFireObject, AngularFireDatabase } from '@angula
 
 @Injectable()
 export class DataProvider {
-  constructor(public http: HttpClient, private db: AngularFireDatabase) {
-
-  }
+  constructor(public http: HttpClient, private db: AngularFireDatabase) {}
 
   getContent<T>(branch: string, batch: number, lastKey: string, filterBy?: string, filter?: string): // 1 e 2
     Observable<T[]> {
@@ -36,33 +33,33 @@ export class DataProvider {
           : query;
       })
     );
-    return contents
+    return contents;
   }
-  getObjectListNumber<T>(path,limit: number, filterBy?: string, ): Observable<T[]> {
+  getObjectListNumber<T>(path, limit: number, filterBy?: string, ): Observable<T[]> {
     return this.mapListKeys(this.db.list(path, ref => {
-      const query = ref
+      const query = ref;
       if (filterBy == null) {
-        return query.limitToFirst(limit)
+        return query.limitToFirst(limit);
       }
-      return query.orderByChild(filterBy).limitToFirst(limit)
+      return query.orderByChild(filterBy).limitToFirst(limit);
     }));
   }
-  getObjectList<T>(path,filterBy?: string, filter?: string | boolean, limit?: number): Observable<T[]> {
+  getObjectList<T>(path, filterBy?: string, filter?: string | boolean, limit?: number): Observable<T[]> {
     return this.mapListKeys(this.db.list(path, ref => {
-      const query = ref
+      const query = ref;
       if (filterBy == null) {
         return query;
       }
       if (limit == null) {
-        return query.orderByChild(filterBy).equalTo(filter)
+        return query.orderByChild(filterBy).equalTo(filter);
       }
-      return query.orderByChild(filterBy).equalTo(filter).limitToFirst(limit)
+      return query.orderByChild(filterBy).equalTo(filter).limitToFirst(limit);
     }));
   }
 
   getObject<T>(path): Observable<T> {
     return this.mapObjectKey(this.db.object(path));
-  } 
+  }
 
   mapListKeys<T>(list: AngularFireList<T>): Observable<T[]> {
     return list.snapshotChanges().pipe(

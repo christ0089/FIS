@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ProductComponent } from './Pages/product/product.component';
-
+import { LoginComponent } from './Pages/login/login.component';
+import { SignupComponent } from './Pages/signup/signup.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ComponentsModule } from './Components/componentsModule';
@@ -40,6 +42,7 @@ import {
   MatToolbarModule,
 } from '@angular/material';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDAGR7GFSd4YbDuO66JAr3IWerlqklgRkc',
@@ -51,23 +54,34 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: '**', component: HomeComponent },
   { path: 'product/:id',    component: ProductComponent },
   {
     path: 'user/:id',
     component: ProfileComponent,
-  }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  { path: '**', component: HomeComponent }
 ];
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    ProductComponent
+    ProductComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
     MatBadgeModule,
     ComponentsModule,
     MatBottomSheetModule,
@@ -99,6 +113,8 @@ const appRoutes: Routes = [
     MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
