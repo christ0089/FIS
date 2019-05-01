@@ -5,6 +5,8 @@ import { ProductService } from 'src/app/Services/productService';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from 'src/app/Services/cart.service';
+import { PurchaseComponent } from './purchace.component';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -17,6 +19,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
+    private dialog: MatDialog,
     private router: Router,
     private dataRoute: ActivatedRoute) {
 
@@ -27,7 +30,6 @@ export class ProductComponent implements OnInit {
       const id = JSON.parse(this.dataRoute.snapshot.params['key']);
       this.product$ = this.productService.getProduct(id);
     })
-   
     this.cart$ = this.cartService.getProducts();
   }
 
@@ -45,6 +47,20 @@ export class ProductComponent implements OnInit {
       return;
     }
     this.router.navigate([page]);
+  }
+
+  removeFromCart(product:Product) {
+    this.cartService.removeFromCart(product);
+  }
+
+  openPurchaseDialog() {
+    const dialogRef = this.dialog.open(PurchaseComponent, {
+      width: '800px',
+      maxWidth: '100%',
+      height: 'fit-content',
+      maxHeight: window.screen.height.toString(),
+      data: { total : this.total}
+    });
   }
 
 }

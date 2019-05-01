@@ -48,7 +48,9 @@ export class Cart implements Cart {
 
 
     removeProduct(product: Product) {
-        this.products.slice(this.products.indexOf(product), 1);
+        console.log(this.products);
+        this.products = this.products.splice(this.products.indexOf(product), 1);
+        console.log(this.products);
     }
 
 

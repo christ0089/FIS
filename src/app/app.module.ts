@@ -47,6 +47,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule} from '@angular/fire/database';
 import { DataProvider } from './Services/dataService';
 import { AuthService } from './Services/auth_service';
+import { PurchaseComponent } from './Pages/product/purchace.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
@@ -86,6 +87,7 @@ const appRoutes: Routes = [
     AddProductComponent,
     LoginComponent,
     SignupComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,
@@ -122,9 +124,13 @@ const appRoutes: Routes = [
     MatSlideToggleModule,
     MatSnackBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [DataProvider,AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    PurchaseComponent
+  ]
 })
 export class AppModule {}
