@@ -2,24 +2,42 @@ import { Product } from "../Models/Product";
 
 export class Cart implements Cart {
 
-    _products: Product[];
-    _total: number;
+    _name: string;
+    _price: number;
+    _coverImg: string;
     _uid: string;
 
-    setProducts(product: Product[]) {
-        this._products = product;
+    constructor () {
+        
+    }
+    setPrice(price: number) {
+        this._price = price;
     }
 
-    setTotal(total: number) {
-        this._total = total;
+    setName(name: string) {
+        this._name = name;
     }
 
+    setCoverImg(coverImg: string) {
+        this._coverImg = coverImg;
+    }
     setUID(uid: string) {
         this._uid = uid;
     }
 
-    Total() {
-        return 
+    getPrice() {
+        return this._price;
+    }
+
+    getName(name: string) {
+        return this._name;
+    }
+
+    getCoverImg(coverImg: string) {
+        return this._coverImg;
+    }
+    getUID(uid: string) {
+        return this._uid;
     }
 
 }

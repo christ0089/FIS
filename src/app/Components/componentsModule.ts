@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule, MatFormFieldModule, MatButtonModule, MatSelectModule, MatInputModule, MatDividerModule, MatMenuModule, MatToolbarModule, MatDialogModule, MatListModule, MatTabsModule, MatCard, MatCardModule } from '@angular/material';
-import { ResultProvider } from '../Services/crud';
+import { ResultProvider } from '../Services/mapService';
 import { UserInfoService } from '../Services/UserInfo/user-info.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
