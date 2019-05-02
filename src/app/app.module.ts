@@ -53,6 +53,7 @@ import { AuthService } from './Services/auth_service';
 import { PurchaseComponent } from './Pages/product/purchace.component';
 import { PostPicture } from './Services/post-picture';
 import { HttpClientModule } from '@angular/common/http';
+import { StatusPipe } from './Pipes/status';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
@@ -101,6 +102,7 @@ const appRoutes: Routes = [
     AddProductComponent,
     LoginComponent,
     SignupComponent,
+    StatusPipe,
     AddProductComponent,
     ChatsComponent,
     PurchaseComponent
@@ -121,6 +123,7 @@ const appRoutes: Routes = [
     MatCardModule,
     MatIconModule,
     MatCheckboxModule,
+
     MatChipsModule,
     MatDialogModule,
     MatDividerModule,

@@ -43,7 +43,7 @@
             {{product.description}}
           </p>
           <p class="price">
-            {{product.price | currency}}
+            Preacio: {{product.price | currency}} - <span>Status: {{product.status | status}}</span>
           </p>
           <button mat-button (click)="goToPage('products/add',product.key)">Editar</button>
           <button mat-button (click)="deleteProduct(product.key)">Borrar</button>
