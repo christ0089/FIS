@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
     this.products$.subscribe((products) => {
       products.forEach(element => {
         if (element.status === ProductStatus.SOLD) {
-          this.total += element.price;
+          this.total += parseFloat(`${element.price}`);
         }
       });
     })
