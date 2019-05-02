@@ -1,0 +1,15 @@
+.container {
+    display: grid;
+    grid-template-columns: minmax(350px, 1fr) minmax(350px, 1fr) minmax(350px, 1fr);
+    gap: 1rem 1rem;
+    padding: 30px;
+  }
+  
+  .container:first-child {
+    margin-left: 0;
+  }
+  
+  .product {
+    max-width: 300px;
+  }
+  

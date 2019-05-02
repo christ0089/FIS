@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="purchaseDialog">Completa Tu Compra</h1>
+<div mat-dialog-content class="purchaseDialog" *ngIf="cart$ | async; let cart">
+    <p> Total - {{data.total | currency}}</p>
+    <mat-divider></mat-divider>
+
+    <p>Tarjeta</p>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+            <input type="text" matInput placeholder="Nombre" formControlName="password" id="password">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Numero de Tarjeta" formControlName="email" id="email">
+            <mat-error
+                *ngIf="!authForm.get('email').hasError('required') && authForm.get('email').hasError('invalidEmail')">
+                El email debe contener <strong>@itesm.mx o @tec.mx</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="password" matInput maxlength="3" #security placeholder="Codigo de Seguridad" formControlName="password" id="password">
+            <mat-hint align="end">{{security.value.length}} / 3</mat-hint>
+        </mat-form-field>
+        <button type=submit mat-raised-button color="primary">Comprar</button>
+    </form>
+    <button mat-button (click)=onNoClick()>Cancelar</button>
+</div>

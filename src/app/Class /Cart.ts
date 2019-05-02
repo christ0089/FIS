@@ -1,46 +1,54 @@
-
 import { Product } from "./Product";
 
 export class Cart implements Cart {
+  private products: Product[] = [];
+  total = 0;
+  private _uid: string;
 
-    private products: Product[];
-    private _total: number;
-    private _uid: string;
+  setProducts(product: Product[]) {
+    this.products = product;
+  }
 
-    constructor () {
-        
-    }
-    setProducts(product: Product[]) {
-       this.products = product;
-    }
+  setTotal(total: number) {
+    this.total = total;
+  }
 
-    setTotal(total: number) {
-        this._total = total;
-    }
+  setUID(uid: string) {
+    this._uid = uid;
+  }
 
-    setUID(uid: string) {
-        this._uid = uid;
-    }
+  getProducts() {
+    return this.products;
+  }
 
-    getProducts(product: Product[]) {
-        return this.products;
-    }
+  getTotal() {
+    return this.total;
+  }
 
-    getTotal() {
-        return this._total;
-    }
+  getUID(uid: string) {
+    return this._uid;
+  }
 
-    getUID(uid: string) {
-        return this._uid;
-    }
+  calcTotal() {
+    this.total = this.products.reduce(
+      (total, product) => total + product.price,
+      0
+    );
+  }
 
-    Total() {
-        let total = 0;
-        return this.products.forEach(product => {
-            total += product.price;
-        });
-    }
+  getCartItems() {
+    return this.products.length;
+  }
 
+  addProduct(product: Product) {
+    console.log(product);
+    this.products.push(product);
+    this.calcTotal();
+  }
 
-
+  removeProduct(product: Product) {
+    console.log(this.products);
+    this.products = this.products.splice(this.products.indexOf(product), 1);
+    console.log(this.products);
+  }
 }

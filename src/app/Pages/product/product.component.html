@@ -1,16 +1,34 @@
-<mat-grid-list cols="4" rows="3" style="margin: 15px 50px" gutterSize="10px" rowHeight="100px" *ngIf="product$ | async; let product">
+<mat-grid-list cols="4" rows="3" style="margin: 15px 50px" gutterSize="10px" rowHeight="100px"
+  *ngIf="product$ | async; let product">
   <mat-grid-tile [colspan]="3" [rowspan]="4">
     <img src="{{product.image}}" alt="Photo of a Shiba Inu">
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="2">
-    <div class="header">
-      <h1>{{product.name}}</h1>
-      <p>{{product.price | currency }}</p>
-      <button mat-button class="cart example-full-width">Add to add Cart</button>
-      <button mat-button class="example-full-width" (click)=onNoClick()>Favorite</button>
-    </div>
+  <div class="column">
 
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="1" [rowspan]="1">
-  </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <div class="header">
+        <h1>{{product.name}}</h1>
+        <p>{{product.price | currency }}</p>
+        <button mat-button class="cart example-full-width" (click)=addToCart(product)>Add to Cart</button>
+        <button mat-button class="example-full-width" >Conversar</button>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1"  [rowspan]="2" class="cart_header" *ngIf="cart$ | async; let cart">
+      <div class="header">
+          <h1>Carrito</h1>
+          <p *ngFor="let cart_product of cart">{{cart_product.name}} - {{cart_product.price | currency}}
+            <button mat-icon-button (click)="removeFromCart(cart_product)"><mat-icon>clear</mat-icon></button>
+          </p>
+          <mat-divider></mat-divider>
+          <p> Total- {{total | currency}}</p>
+          <button mat-button class="cart example-full-width" [disabled]="cart.length == 0" (click)=openPurchaseDialog(product)>Purchase</button>
+      </div>
+    </mat-grid-tile>
+  </div>
 </mat-grid-list>
+<div class="title">
+    <h1>Otros Products</h1>
+    <mat-divider></mat-divider>
+</div>
+
+<product-list (data)="goToPage('products', $event)"></product-list>
