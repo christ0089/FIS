@@ -4,6 +4,7 @@
     <img mat-avatar  *ngIf="image === ''" src={{image}} class='profilePic'>
     <img mat-avatar *ngIf="image !== ''" [src]=image class='profilePic'>
   </button>
+  <mat-progress-bar *ngIf="status == true" mode="indeterminate"></mat-progress-bar>
   <form [formGroup]="addForm">
     <mat-form-field>
       <input matInput placeholder="Nombre" formControlName="name" id="name">

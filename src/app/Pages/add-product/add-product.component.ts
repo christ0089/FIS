@@ -30,6 +30,7 @@ export class AddProductComponent implements OnInit {
   image = './assets/Unknown.png';
   update: boolean = false;
   id: string = '';
+  status = false;
   constructor(private db: AngularFireDatabase,
     private snackBar: MatSnackBar,
     private dataRouter: ActivatedRoute,
@@ -91,6 +92,7 @@ export class AddProductComponent implements OnInit {
 
   addToDocument(event: FileList) {
     console.log("isTriggered");
+    this.status = true;
     const file = event.item(0);
 
 
@@ -109,7 +111,7 @@ export class AddProductComponent implements OnInit {
     this.addForm.get('image').setValue(tempUrl);
     this.image = tempUrl;
     this.camera.postPicture(url, `UserImages/${this.selected}/`).then((firebaseUrl: string) => {
-
+      this.status = false;
       this.addForm.get('image').setValue(firebaseUrl);
       this.image = firebaseUrl;
     }).catch((error) => {
