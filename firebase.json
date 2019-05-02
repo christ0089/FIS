@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/SegundaMano",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

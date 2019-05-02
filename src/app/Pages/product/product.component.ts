@@ -10,6 +10,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/Services/auth_service';
 import { ProductStatus } from 'src/app/Enums/ProductStatus';
+import { auth } from 'firebase';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -36,6 +37,7 @@ export class ProductComponent implements OnInit {
       const id = JSON.parse(this.dataRoute.snapshot.params['key']);
       this.product$ = this.productService.getProduct(id);
     })
+    
     this.cart$ = this.cartService.getProducts();
   }
 
