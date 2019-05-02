@@ -60,6 +60,11 @@
   display: flex;
 }
 
+.conversation {
+  overflow-y: scroll;
+  padding-bottom: 80px;
+}
+
 @media (max-width: 36em) {
   .container {
     height: calc(100vh - 56px);

@@ -67,7 +67,10 @@ export class ChatsComponent implements OnInit {
       sender: this.auth.getCurrentUser().uid,
       timestamp: Date.now(),
     }
-    this.message_service.postMessages(this.selectedConv, messageObj);
+    if(this.message) {
+      this.message_service.postMessages(this.selectedConv, messageObj);
+      this.message = '';
+    }
   }
 
 }
