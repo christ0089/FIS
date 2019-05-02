@@ -29,7 +29,6 @@ export class MessageService {
   }
 
   postMessages(id: string, message) {
-    console.log(id);
     return this.db.database.ref(`messages/${id}`).push(message);
   }
 

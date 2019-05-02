@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth_service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { ProductService } from 'src/app/Services/productService';
+import { Observable } from 'rxjs';
+import { Product } from 'src/app/Class /Product';
+import { CurrencyPipe } from '@angular/common';
 
 function validateMail(control: FormControl) {
   if (
@@ -20,9 +24,10 @@ function validateMail(control: FormControl) {
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-
+  products$: Observable<Product[]>;
   constructor(
     private authService: AuthService,
+    private productService: ProductService,
     public snackbar: MatSnackBar
   ) {}
 
@@ -38,6 +43,7 @@ export class ProfileComponent implements OnInit {
         validateMail
       ])
     });
+    this.products$ = this.productService.getProducts('owner', this.authService.getCurrentUser().uid);
   }
 
   onSubmit = async () => {

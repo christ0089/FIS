@@ -19,7 +19,12 @@
   margin-left: 20px;
   flex-direction: column;
 }
-
+.title {
+  font-size: 25px;
+}
+.price {
+  color: green;
+}
 .image-container {
   width: 130px;
   height: 130px;

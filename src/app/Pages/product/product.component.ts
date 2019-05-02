@@ -8,6 +8,7 @@ import { CartService } from 'src/app/Services/cart.service';
 import { PurchaseComponent } from './purchace.component';
 import { MatDialog } from '@angular/material';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AuthService } from 'src/app/Services/auth_service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -22,6 +23,7 @@ export class ProductComponent implements OnInit {
     private cartService: CartService,
     private dialog: MatDialog,
     private router: Router,
+    private auth: AuthService,
     private database: AngularFireDatabase,
     private dataRoute: ActivatedRoute) {
 
@@ -43,7 +45,6 @@ export class ProductComponent implements OnInit {
   }
 
   goToPage(page, params?) {
-    console.log(params);
     if (params != null) {
       this.router.navigate([page, JSON.stringify(params)]);
       return;
@@ -55,7 +56,16 @@ export class ProductComponent implements OnInit {
     this.cartService.removeFromCart(product);
   }
 
+  openConversation(key) {
+    this.router.navigate(['/chats', {
+      key
+    }])
+  }
+
   openPurchaseDialog() {
+    if (this.auth.isLoggedIn == false) {
+      return this.router.navigate(['/login']);
+    }
     const dialogRef = this.dialog.open(PurchaseComponent, {
       width: '800px',
       maxWidth: '100%',

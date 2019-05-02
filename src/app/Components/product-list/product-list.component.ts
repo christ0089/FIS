@@ -24,7 +24,6 @@ export class ProductListComponent implements OnInit {
   }
 
   goToPage(key: string) {
-
     this.data.emit(key);
   }
 

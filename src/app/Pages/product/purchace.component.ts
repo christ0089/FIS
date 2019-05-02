@@ -23,6 +23,9 @@ export class PurchaseComponent {
     }
 
     onSubmit = async () => {
-        this.dialogRef.close({success : true});
+        this.dialogRef.close({ success: true });
+    }
+    onNoClick() {
+        this.dialogRef.close({ success: false });
     }
 }
