@@ -11,7 +11,7 @@
         <p>{{product.price | currency }}</p>
 
         <button mat-button class="cart example-full-width" [disabled]='product.status == 0' (click)=addToCart(product)>Add to Cart</button>
-        <button mat-button class="example-full-width" [disabled]="auth.isLoggedIn == false"(click)="goToPage('chats', product.owner)">Conversar</button>
+        <button mat-button class="example-full-width"  (click)="goToPage('chats', product.owner)">Conversar</button>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1"  [rowspan]="2" class="cart_header" *ngIf="cart$ | async; let cart">

@@ -48,11 +48,21 @@ export class ProductComponent implements OnInit {
   }
 
   goToPage(page, params?) {
-    if (params != null) {
-      this.router.navigate([page, JSON.stringify(params)]);
-      return;
+    if (page === 'chats' && this.auth.isLoggedIn === false) {
+      return this.router.navigate(['/login']);
     }
-    this.router.navigate([page]);
+    if (params != null) {
+      return this.router.navigate([page, JSON.stringify(params)]);
+    }
+    return this.router.navigate([page]);
+  }
+
+  checkIfAuth() {
+    if (this.auth.isLoggedIn == true) {
+      return true;
+    }
+    this.snackBar.open('Error', 'Inicia Seccion para continuar');
+    return false;
   }
 
   removeFromCart(product:Product) {
