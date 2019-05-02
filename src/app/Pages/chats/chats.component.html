@@ -1,6 +1,6 @@
 <mat-drawer-container class="container">
   <mat-drawer #drawer class="sidebar" mode="side" opened>
-    <mat-nav-list *ngIf="conversation$ | async; let conversations; else emptyConversations">
+    <mat-nav-list [@fadeIn] *ngIf="conversation$ | async; let conversations; else emptyConversations">
       <mat-list-item *ngFor="let conversation of conversations" (click)="getMessages(conversation.convID)">
         <h4 mat-line>{{conversation.convID}}</h4>
         <p mat-line>{{conversation.timestamp | date}}</p>
@@ -17,14 +17,14 @@
       </div>
     </ng-template>
   </mat-drawer>
-  <mat-list class="conversation" *ngIf="messages$ | async; let messages;">
+  <mat-list class="conversation" [@fadeIn] *ngIf="messages$ | async; let messages;">
     <mat-list-item class="message"*ngFor="let message of messages; let i = index" [ngClass]="{'right':message.sender === id}">
       <div class="message-data" [class.right]="message.sender === id" [class.left]="message.sender !== id">
         {{message.message}}
       </div>
     </mat-list-item>
   </mat-list>
-  <mat-card *ngIf="messages$ | async; let messages;" class="message-input-container">
+  <mat-card [@fadeIn] *ngIf="messages$ | async; let messages;" class="message-input-container">
     <mat-form-field class="message-input">
       <input matInput (keyup.enter)="postMessage()" [(ngModel)]="message">
     </mat-form-field>

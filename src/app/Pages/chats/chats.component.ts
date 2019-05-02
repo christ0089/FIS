@@ -4,11 +4,22 @@ import { MessageService } from 'src/app/Services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth_service';
 import { DatePipe} from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
-  styleUrls: ['./chats.component.scss']
+  styleUrls: ['./chats.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({
+          opacity: '0',
+        }),
+        animate('.3s ease-in')
+      ])
+    ]),
+  ]
 })
 export class ChatsComponent implements OnInit {
   conversation$: Observable<any[]>;
