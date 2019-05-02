@@ -1,27 +1,18 @@
-# SegundaMano
+# TerceraMano.com
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
+<img src="./src/assets/logo-original.png" width="320" alt="logo"/>
 
-## Development server
+# Demo completo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Click en: https://soft-eng-d42c8.firebaseapp.com/
 
-## Code scaffolding
+## ¿Cómo funciona?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Se requiere Node.JS en version > 10.0
 
-## Build
+Navega a través de tu terminal hasta el root del proyecto.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* Ejecuta `npm install` para instalar las dependencias
+* Ejecuta `ng serve` para iniciar un servidor de desarrollo.
+* Dirígete a `http://localhost:4200/`. La aplicación cambiará automáticamente conforme haces cambios
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
