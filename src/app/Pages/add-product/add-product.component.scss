@@ -1,0 +1,48 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding: 40px;
+}
+.file_upload {
+  display: none;
+}
+
+.imageButton {
+  background: transparent;
+  border: transparent;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  &:focus {
+      outline: none !important;
+  }
+}
+.profilePic {
+  width: 100% !important;
+  max-height: 300px;
+  overflow: hidden;
+  object-fit: cover;
+  z-index: 0 !important;
+  margin: 0px !important;
+  position: relative !important;
+}
+
+.auth-change {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.logo {
+  margin-left: auto !important;
+  width: 300px;
+  margin-right: auto;
+  display: block;
+}
