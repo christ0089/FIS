@@ -8,6 +8,7 @@ import { Product } from 'src/app/Class /Product';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { PostPicture } from 'src/app/Services/post-picture';
+import { ProductStatus } from 'src/app/Enums/ProductStatus';
 
 function validateMail(control: FormControl) {
   if (
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
   image = 'https://image.flaticon.com/icons/svg/168/168730.svg';
   @ViewChild('fileUpload') myDiv;
   status = false;
+  total = 0;
   constructor(
     private authService: AuthService,
     private productService: ProductService,
@@ -58,6 +60,14 @@ export class ProfileComponent implements OnInit {
     this.profileForm.get("email").setValue(this.authService.getCurrentUser().email);
     this.profileForm.get("photoUrl").setValue(this.authService.getCurrentUser().photoURL);
     this.products$ = this.productService.getProducts('owner', this.authService.getCurrentUser().uid);
+
+    this.products$.subscribe((products) => {
+      products.forEach(element => {
+        if (element.status === ProductStatus.SOLD) {
+          this.total += element.price;
+        }
+      });
+    })
   }
 
   onSubmit = async () => {
