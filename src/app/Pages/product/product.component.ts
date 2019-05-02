@@ -45,6 +45,7 @@ export class ProductComponent implements OnInit {
   addToCart(product: Product) {
     this.cartService.addToCart(product);
     this.total = this.cartService.getTotal();
+    console.log(this.total );
   }
 
   goToPage(page, params?) {

@@ -32,7 +32,8 @@ export class Cart implements Cart {
     }
 
     calcTotal() {
-        this.total = this.products.reduce((total, product) => total + product.price, 0);
+        this.total = this.products.reduce((total, product) => total + parseFloat(`${product.price}`), 0);
+        console.log(this.total)
     }
 
     getCartItems() {
