@@ -123,7 +123,7 @@ const appRoutes: Routes = [
     MatCardModule,
     MatIconModule,
     MatCheckboxModule,
-
+    BrowserAnimationsModule,
     MatChipsModule,
     MatDialogModule,
     MatDividerModule,

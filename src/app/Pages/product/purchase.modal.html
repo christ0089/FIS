@@ -21,7 +21,7 @@
                 formControlName="security_code" id="security_code">
             <mat-hint align="end">{{security.value.length}} / 3</mat-hint>
         </mat-form-field>
-        <button type=submit mat-raised-button color="primary" ngSubmit="onSubmit()">Comprar</button>
+        <button type=submit mat-raised-button color="primary" (click)="onSubmit()">Comprar</button>
     </form>
     <button mat-button (click)=onNoClick()>Cancelar</button>
 </div>

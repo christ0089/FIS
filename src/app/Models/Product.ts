@@ -6,5 +6,6 @@ export interface IProduct {
     coverImg: string;
     key: string;
     status: ProductStatus;
+    favorite: boolean;
     owner: string;
 }

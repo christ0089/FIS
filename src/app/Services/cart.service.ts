@@ -26,4 +26,8 @@ export class CartService {
    this.cart.removeProduct(product);
   }
 
+  removeAll() {
+    this.cart.setProducts([]);
+  }
+
 }

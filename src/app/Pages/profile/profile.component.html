@@ -38,7 +38,7 @@
       </div>
       <div class="text-container">
         <mat-card-header>
-          <mat-card-title class="title">{{product.name}} - <span>Status: {{product.status | status}}</span>
+          <mat-card-title class="title">{{product.name}} 
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -46,7 +46,7 @@
             {{product.description}}
           </p>
           <p class="price">
-            Precio: {{product.price | currency}}
+            Precio: {{product.price | currency}} - <span>Status: {{product.status | status}}</span>
           </p>
           <button mat-button (click)="goToPage('products/add',product.key)">Editar</button>
           <button mat-button (click)="deleteProduct(product.key)">Borrar</button>

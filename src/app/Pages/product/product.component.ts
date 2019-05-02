@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from 'src/app/Services/cart.service';
 import { PurchaseComponent } from './purchace.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/Services/auth_service';
 import { ProductStatus } from 'src/app/Enums/ProductStatus';
@@ -24,6 +24,7 @@ export class ProductComponent implements OnInit {
     private cartService: CartService,
     private dialog: MatDialog,
     private router: Router,
+    private snackBar: MatSnackBar,
     private auth: AuthService,
     private database: AngularFireDatabase,
     private dataRoute: ActivatedRoute) {
@@ -73,7 +74,10 @@ export class ProductComponent implements OnInit {
 
     dialogRef.afterClosed().toPromise().then((data) => {
       if (data.success == true) {
-        this.database.database.ref(`products/${id}`).update({status : ProductStatus.SOLD});
+        this.database.database.ref(`products/${id}`).update({status : ProductStatus.SOLD}).then(() => {
+          this.cartService.removeAll();
+          this.snackBar.open('Exito', 'Se ha realizado tu compra');
+        });
       }
     })
   }

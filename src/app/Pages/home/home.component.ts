@@ -8,11 +8,22 @@ import { CartService } from 'src/app/Services/cart.service';
 import { FormControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { ProductStatus } from 'src/app/Enums/ProductStatus';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({
+          opacity: '0',
+        }),
+        animate('.3s ease-in')
+      ])
+    ]),
+  ]
 })
 export class HomeComponent implements OnInit {
   categories = ["Menu", "Escuela", "Tienda", "Trabajo"];
@@ -46,6 +57,12 @@ export class HomeComponent implements OnInit {
       this.products$ = this.productService.getProducts('category', this.categories[$event]);
     }
 
+  }
+  setAsFavorite(value: boolean, idx: number) {
+    this.products$ = this.products$.pipe(map(products => {
+      products[idx].favorite =  value  == true ? false : true;
+      return products;
+    }))
   }
 
   goToPage(page, params?) {

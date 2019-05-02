@@ -7,8 +7,8 @@
   <span matPrefix><mat-icon>search</mat-icon></span>
   <input matInput placeholder="Busqueda" (input)="search($event.target.value)"/>
 </mat-form-field>
-<div class="container" *ngIf="products$ | async; let products">
-    <mat-card *ngFor="let product of products" >
+<div class="container" [@fadeIn] *ngIf="products$ | async; let products">
+    <mat-card *ngFor="let product of products; let i = index;" >
       <mat-card-header (click)="goToPage('products', product.key)">
         <div mat-card-avatar></div>
         <mat-card-title>{{ product.name }}</mat-card-title>
@@ -19,11 +19,13 @@
           {{product.description}}
         </p>
         <p class="price">
-          {{product.price | currency}}
+          {{product.price | currency}} <span *ngIf='product.status == 0'>- Vendido</span>
         </p>
+        
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button [disabled]='product.status == 0'  (click)="cartService.addToCart(product)">ADD TO CART</button>
+
+        <button mat-button  [@fadeIn] [disabled]='product.status == 0'  (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">EN FAVORITOS</span><span *ngIf="product.favorite != true">AGREGAR EN FAVORITOS</span></button>
       </mat-card-actions>
     </mat-card>
   </div>

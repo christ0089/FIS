@@ -12,6 +12,7 @@ export class Product implements IProduct {
     owner: string = '';
     status: ProductStatus;
     user: User;
+    favorite = false;
     constructor() {
 
     }
@@ -50,6 +51,9 @@ export class Product implements IProduct {
 
     getPrice() {
         return this.price;
+    }
+    setAsFavorite(value: boolean) {
+        this.favorite = value === true ? false : true;
     }
 
     getName(): string {
