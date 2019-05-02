@@ -33,6 +33,10 @@ export class AuthService {
     );
   }
 
+  getCurrentUser() {
+    return this.afAuth.auth.currentUser;
+  }
+
   signUp = async ({ email, password, firstName, lastName }) => {
     await this.afAuth.auth.createUserWithEmailAndPassword(
       email,

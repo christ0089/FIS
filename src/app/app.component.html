@@ -17,6 +17,9 @@
       <button mat-menu-item disabled>
         Bienvenido
       </button>
+      <button mat-menu-item [routerLink]="['/user/', userId]">
+        Mi perfil
+      </button>
       <button mat-menu-item [routerLink]="['/chats']">
         Conversaciones
       </button>

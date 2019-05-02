@@ -8,14 +8,21 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
-  title = 'TerceraMano';
+  userId: string;
 
   constructor(
     public authService: AuthService,
     public router: Router,
     public snackbar: MatSnackBar,
-    ) {}
+    ) {
+      this.authService.getUserData().subscribe(user => {
+        if (user && user.uid) {
+          this.userId = user.uid;
+        }
+      });
+    }
 
   logOut() {
     this.authService.logOut();
