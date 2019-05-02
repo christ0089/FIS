@@ -4,7 +4,16 @@ import { Cart } from "src/app/Class /Cart";
 import { Observable } from "rxjs";
 import { CartService } from "src/app/Services/cart.service";
 import { Product } from "src/app/Class /Product";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
+function validateNumber(control: FormControl) {
+    if (
+        isNaN(Number(control.value.toString()))
+    ) {
+        return { invalidNumber: true };
+    }
+    return null;
+}
 @Component({
     selector: 'purshase-component',
     styleUrls: ['product.component.scss'],
@@ -12,6 +21,7 @@ import { Product } from "src/app/Class /Product";
 })
 export class PurchaseComponent {
     cart$: Observable<Product[]>;
+    cardForm: FormGroup;
     constructor(
         public dialogRef: MatDialogRef<PurchaseComponent>,
         public snackBar: MatSnackBar,
@@ -20,10 +30,21 @@ export class PurchaseComponent {
         if (data != null) {
             this.cart$ = this.cartService.getProducts();
         }
+        this.cardForm = new FormGroup({
+            name: new FormControl('', [
+              Validators.required,
+            ]),
+            card_number: new FormControl('', [Validators.required, validateNumber]),
+            security_code: new FormControl('', [Validators.required, validateNumber])
+          });
     }
 
     onSubmit = async () => {
-        this.dialogRef.close({ success: true });
+        if(this.cardForm.valid == true) {
+            this.dialogRef.close({ success: true });
+        } else {
+            this.snackBar.open('Algo esta mal', 'Verfique');
+        }
     }
     onNoClick() {
         this.dialogRef.close({ success: false });

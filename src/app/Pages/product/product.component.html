@@ -20,7 +20,7 @@
             <button mat-icon-button (click)="removeFromCart(cart_product)"><mat-icon>clear</mat-icon></button>
           </p>
           <mat-divider></mat-divider>
-          <p> Total- {{total | currency}}</p>
+          <p> Total - {{total | currency}}</p>
           <button mat-button class="cart example-full-width" [disabled]="cart.length == 0" (click)=openPurchaseDialog(product)>Purchase</button>
       </div>
     </mat-grid-tile>

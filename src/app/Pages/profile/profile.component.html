@@ -45,8 +45,8 @@
           <p class="price">
             {{product.price | currency}}
           </p>
-          <button mat-button>Editar</button>
-          <button mat-button>Borrar</button>
+          <button mat-button (click)="goToPage('products/add',product.key)">Editar</button>
+          <button mat-button (click)="deleteProduct(product.key)">Borrar</button>
         </mat-card-content>
       </div>
     </mat-card>

@@ -4,18 +4,24 @@
     <mat-divider></mat-divider>
 
     <p>Tarjeta</p>
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="cardForm" >
         <mat-form-field>
             <input type="text" matInput placeholder="Nombre" formControlName="name" id="name">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Numero de Tarjeta" maxlength="16" formControlName="card_number" id="card_number">
+            <input matInput placeholder="Numero de Tarjeta"  minlength="16" maxlength="16" formControlName="card_number"
+                id="card_number">
+            <mat-error
+                *ngIf="!cardForm.get('card_number').hasError('required') && cardForm.get('card_number').hasError('invalidNumber')">
+                No puede usar characteres solo numero
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input type="password" matInput maxlength="3" #security placeholder="Codigo de Seguridad" formControlName="security_code" id="security_code">
+            <input type="password" matInput minlength="3" maxlength="3" #security placeholder="Codigo de Seguridad"
+                formControlName="security_code" id="security_code">
             <mat-hint align="end">{{security.value.length}} / 3</mat-hint>
         </mat-form-field>
-        <button type=submit mat-raised-button color="primary">Comprar</button>
+        <button type=submit mat-raised-button color="primary" ngSubmit="onSubmit()">Comprar</button>
     </form>
     <button mat-button (click)=onNoClick()>Cancelar</button>
 </div>

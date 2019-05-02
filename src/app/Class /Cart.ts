@@ -40,14 +40,13 @@ export class Cart implements Cart {
 
 
     addProduct(product: Product) {
-        console.log(product);
         this.products.push(product);
         this.calcTotal();
     }
 
 
     removeProduct(product: Product) {
-        this.products = this.products.splice(this.products.indexOf(product), 1);
+        this.products.splice(this.products.indexOf(product), 1);
         this.calcTotal();
     }
 

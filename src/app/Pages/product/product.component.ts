@@ -54,6 +54,7 @@ export class ProductComponent implements OnInit {
 
   removeFromCart(product:Product) {
     this.cartService.removeFromCart(product);
+    this.total = this.cartService.getTotal();
   }
 
 

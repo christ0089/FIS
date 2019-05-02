@@ -6,6 +6,7 @@ import { ProductService } from 'src/app/Services/productService';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/Class /Product';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 function validateMail(control: FormControl) {
   if (
@@ -28,6 +29,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private productService: ProductService,
+    private router: Router,
     public snackbar: MatSnackBar
   ) {}
 
@@ -72,4 +74,17 @@ export class ProfileComponent implements OnInit {
       }
     }
   };
+
+  deleteProduct(id) {
+    this.productService.deleteProduct(id);
+  }
+
+  goToPage(page, params?) {
+    console.log(params)
+    if (params != null) {
+      this.router.navigate([page, JSON.stringify(params)]);
+      return;
+    }
+    this.router.navigate([page]);
+  }
 }

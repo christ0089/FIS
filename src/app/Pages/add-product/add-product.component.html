@@ -1,6 +1,6 @@
 <mat-card class="form-container">
   <mat-card-title>Añade un nuevo producto</mat-card-title>
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="addForm" >
     <mat-form-field>
       <input matInput placeholder="Nombre" formControlName="name" id="name">
     </mat-form-field>
@@ -9,8 +9,8 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Categoría</mat-label>
-      <mat-select required [(value)]="selected" >
-        <mat-option *ngFor="let category of categories" >
+      <mat-select [(value)]="selected">
+        <mat-option *ngFor="let category of categories" value="category">
           {{category}}
         </mat-option>
       </mat-select>
@@ -20,8 +20,11 @@
     </mat-form-field>
     <mat-form-field>
       <span matPrefix>$ &nbsp;</span>
-      <input matInput type="number" placeholder="Precio" formControlName="price" id="price" />
+      <input matInput  placeholder="Precio" formControlName="price" id="price" />
+      <mat-error *ngIf="!addForm.get('price').hasError('required') || addForm.get('price').hasError('invalidNumber')">
+        No puede usar characteres solo numeros
+      </mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Añadir producto</button>
+    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Añadir producto</button>
   </form>
 </mat-card>

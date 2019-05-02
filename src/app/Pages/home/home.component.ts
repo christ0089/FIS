@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   @Input('category') category: number;
   constructor(
     public productService: ProductService,
-    private cardService: CartService,
+    private cartService: CartService,
     private router: Router
   ) {
     this.products$ = productService.getProducts();

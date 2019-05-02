@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { User } from '../Class /User';
 import { IProduct } from '../Models/Product';
 import { map } from 'rxjs/operators';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private mapService: DataProvider) { }
+  constructor(private mapService: DataProvider, private db: AngularFireDatabase) { }
 
   getProducts(filter?: string, filterBy?: string | number): Observable<Product[]> {
     if (filter !== null && filterBy !== null) {
@@ -26,5 +27,12 @@ export class ProductService {
 
   getProduct(id: string): Observable<Product> {
     return this.mapService.getObject<Product>(`products/${id}`);
+  }
+
+  deleteProduct(id) {
+    return this.db.database.ref(`products/${id}`).remove()
+  }
+  updateProduct(id, product) {
+    return this.db.database.ref(`products/${id}`).update(product)
   }
 }

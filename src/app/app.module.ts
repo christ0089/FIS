@@ -65,6 +65,7 @@ const appRoutes: Routes = [
   { path: 'products', children: [
     { path: '', component: HomeComponent },
     { path: 'add', component: AddProductComponent } ,
+    { path: 'add/:key', component: AddProductComponent } ,
     { path: ':key', component: ProductComponent } ,
   ] },
   {
