@@ -39,7 +39,6 @@ export class ProductComponent implements OnInit {
     this.cart$ = this.cartService.getProducts();
   }
 
-  
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
@@ -76,6 +75,7 @@ export class ProductComponent implements OnInit {
       if (data.success == true) {
         this.database.database.ref(`products/${id}`).update({status : ProductStatus.SOLD}).then(() => {
           this.cartService.removeAll();
+          this.total = this.cartService.getTotal();
           this.snackBar.open('Exito', 'Se ha realizado tu compra');
         });
       }

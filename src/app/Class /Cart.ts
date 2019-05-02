@@ -8,6 +8,7 @@ export class Cart implements Cart {
 
     setProducts(product: Product[]) {
        this.products = product;
+       this.calcTotal();
     }
 
     setTotal(total: number) {
