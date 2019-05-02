@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from 'src/app/Services/cart.service';
 import { FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { ProductStatus } from 'src/app/Enums/ProductStatus';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +16,9 @@ import { FormControl } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   categories = ["Menu", "Escuela", "Tienda", "Trabajo"];
-
   products$: Observable<Product[]>;
   @Input('category') category: number;
+  selected = 0;
   constructor(
     public productService: ProductService,
     private cartService: CartService,
@@ -24,14 +26,20 @@ export class HomeComponent implements OnInit {
   ) {
     this.products$ = productService.getProducts();
 
-
   }
 
   ngOnInit() {
 
   }
 
+  search(value) {
+    this.getSelected(this.selected);
+    this.products$ = this.products$.pipe(map(items => items.filter(item =>
+      item.name.toLowerCase().indexOf(value.toLowerCase()) > -1)));
+  }
+
   getSelected($event) {
+    this.selected = $event;
     if ($event == 0) {
       this.products$ = this.productService.getProducts();
     } else {

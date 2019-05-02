@@ -3,6 +3,7 @@
     <img src="../assets/logo-white.png" class="logo" alt="Logo">
   </a>
   <span style="flex: 1 1 auto;"></span>
+
   <button mat-button *ngIf="!authService.isLoggedIn" [routerLink]="['/login']">
     Login
     <mat-icon class="icon">account_circle</mat-icon>

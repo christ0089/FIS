@@ -16,11 +16,11 @@ export class ProductService {
 
   getProducts(filter?: string, filterBy?: string | number): Observable<Product[]> {
     if (filter !== null && filterBy !== null) {
-      return this.mapService.getObjectList('products', filter, filterBy, 10);
+      return this.mapService.getObjectList<Product>('products', filter, filterBy, 10);
     }
 
     if (filter !== null) {
-      return this.mapService.getObjectListNumber('products', 5);
+      return this.mapService.getObjectListNumber<Product>('products', 5);
     }
     return this.mapService.getObjectListNumber<Product>('products', 5);
   }
