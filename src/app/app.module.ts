@@ -80,6 +80,10 @@ const appRoutes: Routes = [
     component: ChatsComponent
   },
   {
+    path: 'chats/:key',
+    component: ChatsComponent
+  },
+  {
     path: 'signup',
     component: SignupComponent
   },

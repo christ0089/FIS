@@ -1,38 +1,33 @@
 <mat-drawer-container class="container">
   <mat-drawer #drawer class="sidebar" mode="side" opened>
-    <mat-nav-list>
-      <mat-list-item>
-        Ernesto García
-      </mat-list-item>
-      <mat-list-item>
-        Ernesto García
-      </mat-list-item>
-      <mat-list-item>
-        Ernesto García
+    <mat-nav-list *ngIf="conversation$ | async; let conversations; else emptyConversations">
+      <mat-list-item *ngFor="let conversation of conversations" (click)="getMessages(conversation.convID)">
+        <h4 mat-line>{{conversation.convID}}</h4>
+        <p mat-line>{{conversation.timestamp | date}}</p>
       </mat-list-item>
     </mat-nav-list>
+    <ng-template #emptyConversations>
+      <div>
+        <p class="empty">
+          <mat-icon>clear</mat-icon>
+        </p>
+        <p class="empty">
+          Empty Conversations
+        </p>
+      </div>
+    </ng-template>
   </mat-drawer>
-  <mat-list>
-    <mat-list-item class="message">
-      <div class="left message-data">
-        Mensaje 1
-      </div>
-    </mat-list-item>
-    <mat-list-item class="message right">
-      <div class="right message-data">
-        Mensaje 2
-      </div>
-    </mat-list-item>
-    <mat-list-item class="message">
-      <div class="left message-data">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <mat-list *ngIf="messages$ | async; let messages;">
+    <mat-list-item class="message"*ngFor="let message of messages;" [ngClass]="{'right':message.sender === id}">
+      <div class="message-data" [class.right]="message.sender === id" [class.left]="message.sender !== id">
+        {{message.message}}
       </div>
     </mat-list-item>
   </mat-list>
   <mat-card class="message-input-container">
     <mat-form-field class="message-input">
-      <input matInput>
+      <input matInput [(ngModel)]="message">
     </mat-form-field>
-    <button mat-flat-button color="primary">Enviar</button>
+    <button mat-flat-button color="primary" (click)="postMessage()">Enviar</button>
   </mat-card>
 </mat-drawer-container>

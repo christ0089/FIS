@@ -1,13 +1,16 @@
 import { IProduct } from "../Models/Product";
 import { User } from "./User";
+import { ProductStatus } from "../Enums/ProductStatus";
 
 export class Product implements IProduct {
 
     name: string;
     price: number;
     coverImg: string;
-    uid: string;
-    owner: string;
+    key: string = '';
+    category: string;
+    owner: string = '';
+    status: ProductStatus;
     user: User;
     constructor() {
 
@@ -23,12 +26,26 @@ export class Product implements IProduct {
     setCoverImg(coverImg: string) {
         this.coverImg = coverImg;
     }
-    setUID(uid: string) {
-        this.uid = uid;
+
+    setUID(key: string) {
+        this.key = key;
+    }
+
+    setOwner(key: string) {
+        console.log(key);
+        this.key = key;
+    }
+
+    setCategory(category: string) {
+        this.category = category;
     }
 
     setUser(user: User) {
         this.user = user;
+    }
+
+    setProductStatus(status: ProductStatus) {
+        this.status = status;
     }
 
     getPrice() {
@@ -43,7 +60,7 @@ export class Product implements IProduct {
         return this.coverImg;
     }
     getUID(): string {
-        return this.uid;
+        return this.key;
     }
 
     getOwner(): string {

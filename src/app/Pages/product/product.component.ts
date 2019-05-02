@@ -56,11 +56,6 @@ export class ProductComponent implements OnInit {
     this.cartService.removeFromCart(product);
   }
 
-  openConversation(key) {
-    this.router.navigate(['/chats', {
-      key
-    }])
-  }
 
   openPurchaseDialog() {
     if (this.auth.isLoggedIn == false) {

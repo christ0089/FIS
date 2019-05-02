@@ -47,7 +47,7 @@ export class DataProvider {
       return query.orderByChild(filterBy).limitToFirst(limit)
     }));
   }
-  getObjectList<T>(path,filterBy?: string, filter?: string | boolean, limit?: number): Observable<T[]> {
+  getObjectList<T>(path,filterBy?: string, filter?: string | boolean | number, limit?: number): Observable<T[]> {
     return this.mapListKeys(this.db.list(path, ref => {
       const query = ref
       if (filterBy == null) {

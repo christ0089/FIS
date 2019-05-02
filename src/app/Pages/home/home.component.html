@@ -1,31 +1,24 @@
-<mat-tab-group>
-  <mat-tab label="Más recientes">
-    <div class="container" *ngIf="products$ | async; let products">
-      <mat-card *ngFor="let product of products" (click)="goToPage('products', product.key)">
-        <mat-card-header>
-          <div mat-card-avatar></div>
-          <mat-card-title>{{ product.name }}</mat-card-title>
-        </mat-card-header>
-        <img class="image" mat-card-image src="{{ product.image }}" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            {{product.description}}
-          </p>
-          <p class="price">
-            {{product.price | currency}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </mat-tab>
-  <mat-tab label="Hot">
-    <div class="container">
-
-      <p>Hola :)</p>
-    </div>
+<mat-tab-group (selectedIndexChange)="getSelected($event)">
+  <mat-tab *ngFor="let category of categories;" label={{category}}>
   </mat-tab>
 </mat-tab-group>
+<div class="container" *ngIf="products$ | async; let products">
+    <mat-card *ngFor="let product of products" (click)="goToPage('products', product.key)">
+      <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+      </mat-card-header>
+      <img class="image" mat-card-image src="{{ product.image }}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          {{product.description}}
+        </p>
+        <p class="price">
+          {{product.price | currency}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="cartService.addProduct(product)">ADD TO CART</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

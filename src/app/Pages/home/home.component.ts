@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../../Services/productService';
 import { Product } from '../../Class /Product';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { CurrencyPipe} from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { CartService } from 'src/app/Services/cart.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +13,31 @@ import { CartService } from 'src/app/Services/cart.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products$:Observable<Product[]>;
+  categories = ["Menu", "Escuela", "Tienda", "Trabajo"];
 
-  constructor( 
+  products$: Observable<Product[]>;
+  @Input('category') category: number;
+  constructor(
     public productService: ProductService,
     private cardService: CartService,
     private router: Router
   ) {
     this.products$ = productService.getProducts();
+
+
   }
 
   ngOnInit() {
+
+  }
+
+  getSelected($event) {
+    if ($event == 0) {
+      this.products$ = this.productService.getProducts();
+    } else {
+      this.products$ = this.productService.getProducts('category', this.categories[$event]);
+    }
+
   }
 
   goToPage(page, params?) {

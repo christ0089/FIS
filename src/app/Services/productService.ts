@@ -13,12 +13,12 @@ export class ProductService {
 
   constructor(private mapService: DataProvider) { }
 
-  getProducts(category?: string, filterBy?: string): Observable<Product[]> {
-    if (category !== null && filterBy !== null) {
-      return this.mapService.getObjectList('products', category, filterBy, 10);
+  getProducts(filter?: string, filterBy?: string | number): Observable<Product[]> {
+    if (filter !== null && filterBy !== null) {
+      return this.mapService.getObjectList('products', filter, filterBy, 10);
     }
 
-    if (category !== null) {
+    if (filter !== null) {
       return this.mapService.getObjectListNumber('products', 5);
     }
     return this.mapService.getObjectListNumber<Product>('products', 5);

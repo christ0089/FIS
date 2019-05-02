@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Product } from 'src/app/Class /Product';
 import { AuthService } from 'src/app/Services/auth_service';
+import { ProductStatus } from 'src/app/Enums/ProductStatus';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-product',
@@ -11,8 +13,11 @@ import { AuthService } from 'src/app/Services/auth_service';
 })
 export class AddProductComponent implements OnInit {
   addForm: FormGroup;
-
-  constructor(private db: AngularFireDatabase, private auth: AuthService) {
+  categories = ["Ninguna","Escuela", "Tienda", "Trabajo"];
+  selected = 'Ninguna';
+  constructor(private db: AngularFireDatabase,
+     private snackBar: MatSnackBar,
+     private auth: AuthService) {
 
   }
 
@@ -20,19 +25,23 @@ export class AddProductComponent implements OnInit {
     this.addForm = new FormGroup({
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      category: new FormControl('', [Validators.required]),
       image: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required)
     });
   }
 
   onSubmit = () => {
-    if (this.addForm.value.name !== '' && this.addForm.value.description !== '' && this.addForm.value.category !== '' && this.addForm.value.image !== '' && this.addForm.value.price !== '') {
+    if (this.addForm.value.name !== '' && this.addForm.value.description !== '' && this.addForm.value.image !== '' && this.addForm.value.price !== '') {
       const product = this.addForm.value as Product;
-      this.auth.getCurrentUser().getIdToken().then((token: string) => {
-        product.setUID(token);
-        this.db.database.ref('products').push(product);
-      })
+      const key = this.auth.getCurrentUser().uid;
+      product.owner = key;
+      product.category =  this.selected;
+      product.status = ProductStatus.PENDING;
+      this.db.database.ref('products').push(product).then(() => {
+        this.snackBar.open("Success", "Continue");
+        this.ngOnInit();
+      });
+
     }
   }
 }

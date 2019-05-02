@@ -8,13 +8,18 @@
       <input matInput placeholder="Description" formControlName="description" id="description">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Categoría" formControlName="category" id="category" />
+      <mat-label>Categoría</mat-label>
+      <mat-select required [(value)]="selected" >
+        <mat-option *ngFor="let category of categories" >
+          {{category}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Imagen" formControlName="image" id="image" />
     </mat-form-field>
     <mat-form-field>
-      <span matPrefix>$  &nbsp;</span>
+      <span matPrefix>$ &nbsp;</span>
       <input matInput type="number" placeholder="Precio" formControlName="price" id="price" />
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Añadir producto</button>
