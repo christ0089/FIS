@@ -7,6 +7,7 @@ import { CurrencyPipe } from '@angular/common';
 import { CartService } from 'src/app/Services/cart.service';
 import { PurchaseComponent } from './purchace.component';
 import { MatDialog } from '@angular/material';
+import { AngularFireDatabase } from '@angular/fire/database';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -21,6 +22,7 @@ export class ProductComponent implements OnInit {
     private cartService: CartService,
     private dialog: MatDialog,
     private router: Router,
+    private database: AngularFireDatabase,
     private dataRoute: ActivatedRoute) {
 
   }
@@ -61,6 +63,13 @@ export class ProductComponent implements OnInit {
       maxHeight: window.screen.height.toString(),
       data: { total : this.total}
     });
+
+    dialogRef.afterClosed().toPromise().then((data) => {
+      
+      if (data.success) {
+        this.database.database.ref('Sold').push(this.cartService.cart.getProducts())
+      }
+    })
   }
 
 }

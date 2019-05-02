@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Product } from 'src/app/Class /Product';
+import { AuthService } from 'src/app/Services/auth_service';
 
 @Component({
   selector: 'app-add-product',
@@ -9,7 +12,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AddProductComponent implements OnInit {
   addForm: FormGroup;
 
-  constructor() {}
+  constructor(private db: AngularFireDatabase, private auth: AuthService) {
+
+  }
 
   ngOnInit() {
     this.addForm = new FormGroup({
@@ -22,6 +27,12 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit = () => {
-    console.log('Yea :)')
+    if (this.addForm.value.name !== '' && this.addForm.value.description !== '' && this.addForm.value.category !== '' && this.addForm.value.image !== '' && this.addForm.value.price !== '') {
+      const product = this.addForm.value as Product;
+      this.auth.getCurrentUser().getIdToken().then((token: string) => {
+        product.setUID(token);
+        this.db.database.ref('products').push(product);
+      })
+    }
   }
 }
