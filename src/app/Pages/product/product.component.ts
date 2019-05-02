@@ -9,6 +9,7 @@ import { PurchaseComponent } from './purchace.component';
 import { MatDialog } from '@angular/material';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from 'src/app/Services/auth_service';
+import { ProductStatus } from 'src/app/Enums/ProductStatus';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -58,7 +59,7 @@ export class ProductComponent implements OnInit {
   }
 
 
-  openPurchaseDialog() {
+  openPurchaseDialog(id) {
     if (this.auth.isLoggedIn == false) {
       return this.router.navigate(['/login']);
     }
@@ -71,9 +72,8 @@ export class ProductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().toPromise().then((data) => {
-      
-      if (data.success) {
-        this.database.database.ref('Sold').push(this.cartService.cart.getProducts())
+      if (data.success == true) {
+        this.database.database.ref(`products/${id}`).update({status : ProductStatus.SOLD});
       }
     })
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../Services/auth_service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Product } from 'src/app/Class /Product';
 import { CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { PostPicture } from 'src/app/Services/post-picture';
 
 function validateMail(control: FormControl) {
   if (
@@ -26,10 +27,14 @@ function validateMail(control: FormControl) {
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   products$: Observable<Product[]>;
+  image = 'https://image.flaticon.com/icons/svg/168/168730.svg';
+  @ViewChild('fileUpload') myDiv;
+  status = false;
   constructor(
     private authService: AuthService,
     private productService: ProductService,
     private router: Router,
+    private camera: PostPicture,
     public snackbar: MatSnackBar
   ) {}
 
@@ -37,7 +42,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      cellPhone: new FormControl('', Validators.required),
+      cellPhone: new FormControl(''),
       photoUrl: new FormControl('', Validators.required),
       email: new FormControl('', [
         Validators.required,
@@ -45,6 +50,13 @@ export class ProfileComponent implements OnInit {
         validateMail
       ])
     });
+    if (this.authService.getCurrentUser().photoURL !== null) {
+      this.image = this.authService.getCurrentUser().photoURL;
+    }
+    this.profileForm.get("firstName").setValue(this.authService.getCurrentUser().displayName);
+    this.profileForm.get("cellPhone").setValue(this.authService.getCurrentUser().phoneNumber);
+    this.profileForm.get("email").setValue(this.authService.getCurrentUser().email);
+    this.profileForm.get("photoUrl").setValue(this.authService.getCurrentUser().photoURL);
     this.products$ = this.productService.getProducts('owner', this.authService.getCurrentUser().uid);
   }
 
@@ -61,11 +73,14 @@ export class ProfileComponent implements OnInit {
         const currentUser = this.authService.getCurrentUser();
         const displayName = `${firstName} ${lastName}`;
         currentUser.updateEmail(email);
-        currentUser.updatePhoneNumber(cellPhone);
+        if (cellPhone !== null) {
+          currentUser.updatePhoneNumber(cellPhone);
+        }
         currentUser.updateProfile({
           photoURL: photoUrl,
           displayName
         });
+        this.image = photoUrl;
         this.snackbar.open('Usuario actualizado correctamente', 'Cerrar', {
           duration: 2500
         });
@@ -87,4 +102,39 @@ export class ProfileComponent implements OnInit {
     }
     this.router.navigate([page]);
   }
+
+
+  openGallery(selection) {
+    let el: HTMLElement = this.myDiv.nativeElement as HTMLElement;
+    console.log(el);
+    el.click();
+  }
+
+  addToDocument(event: FileList) {
+    console.log("isTriggered");
+    this.status = true;
+    const file = event.item(0);
+
+    if (file.type.split('/')[0] !== 'image') {
+      console.log("No Supported");
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => this.postPicture(file, reader.result.toString());
+  }
+
+
+  postPicture(url: File, tempUrl) {
+    this.profileForm.get('photoUrl').setValue(tempUrl);
+    this.image = tempUrl;
+    this.camera.postPicture(url, `UserImages/${Date.now()}/`).then((firebaseUrl: string) => {
+      this.status = false;
+      this.profileForm.get('photoUrl').setValue(firebaseUrl);
+      this.image = firebaseUrl;
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 }
+

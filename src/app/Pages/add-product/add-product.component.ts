@@ -31,12 +31,12 @@ export class AddProductComponent implements OnInit {
   update: boolean = false;
   id: string = '';
   status = false;
+  @ViewChild('fileUpload') myDiv;
   constructor(private db: AngularFireDatabase,
     private snackBar: MatSnackBar,
     private dataRouter: ActivatedRoute,
     private camera: PostPicture,
-    private auth: AuthService) {
-      
+    private auth: AuthService) {   
   }
 
   ngOnInit() {
@@ -82,9 +82,8 @@ export class AddProductComponent implements OnInit {
       this.snackBar.open("Error", "Verifique sus datos");
     }
   }
-  @ViewChild('fileUpload') myDiv;
+
   openGallery(selection) {
-    this.selected = selection
     let el: HTMLElement = this.myDiv.nativeElement as HTMLElement;
     console.log(el);
     el.click();

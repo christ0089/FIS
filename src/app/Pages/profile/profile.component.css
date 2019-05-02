@@ -4,6 +4,10 @@
   padding-top: 80px;
 }
 
+.file_upload {
+  display: none;
+}
+
 .user {
   display: flex;
   flex-basis: 40%;

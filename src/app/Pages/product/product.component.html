@@ -21,7 +21,7 @@
           </p>
           <mat-divider></mat-divider>
           <p> Total - {{total | currency}}</p>
-          <button mat-button class="cart example-full-width" [disabled]="cart.length == 0" (click)=openPurchaseDialog(product)>Purchase</button>
+          <button mat-button class="cart example-full-width" [disabled]="cart.length == 0" (click)=openPurchaseDialog(product.key)>Purchase</button>
       </div>
     </mat-grid-tile>
   </div>
