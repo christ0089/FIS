@@ -14,7 +14,8 @@
       <input matInput placeholder="Imagen" formControlName="image" id="image" />
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Precio" formControlName="price" id="price" />
+      <span matPrefix>$  &nbsp;</span>
+      <input matInput type="number" placeholder="Precio" formControlName="price" id="price" />
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary">Añadir producto</button>
   </form>

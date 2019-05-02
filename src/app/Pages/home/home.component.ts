@@ -14,8 +14,9 @@ import { CartService } from 'src/app/Services/cart.service';
 export class HomeComponent implements OnInit {
   products$:Observable<Product[]>;
 
-  constructor(
+  constructor( 
     public productService: ProductService,
+    private cardService: CartService,
     private router: Router
   ) {
     this.products$ = productService.getProducts();
