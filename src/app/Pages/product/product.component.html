@@ -1,32 +1,21 @@
 <mat-grid-list cols="4" rows="3" style="margin: 15px 50px" gutterSize="10px" rowHeight="100px"
   *ngIf="product$ | async; let product">
-  <mat-grid-tile [colspan]="3" [rowspan]="4">
+  <mat-grid-tile [colspan]="4" [rowspan]="4">
     <img src="{{product.image}}" alt="Photo of a Shiba Inu">
   </mat-grid-tile>
-  <div class="column">
+  <div class="row">
 
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-grid-tile style="align-self: center;" [colspan]="3" [rowspan]="4">
       <div class="header">
         <h1>{{product.name}} <span *ngIf='product.status == 1'>- {{product.status | status}}</span></h1>
-
-        <button mat-button class="cart example-full-width" [disabled]='product.status == 0' (click)=addToCart(product)>Add to Cart</button>
-        <mat-card-actions style="margin: auto;">
-          <button mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">EN FAVORITOS</span><span *ngIf="product.favorite != true">AGREGAR EN FAVORITOS</span></button>
+        <p style="color: black;">{{product.description}}</p>
+        <mat-card-actions style="margin: auto;" >
+          <button  style="background-color: #dfdddd" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
         </mat-card-actions>
         <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner)">Chat</button>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="1"  [rowspan]="2" class="cart_header" *ngIf="cart$ | async; let cart">
-      <div class="header">
-          <h1>Carrito</h1>
-          <p *ngFor="let cart_product of cart">{{cart_product.name}} - {{cart_product.price | currency}}
-            <button mat-icon-button (click)="removeFromCart(cart_product)"><mat-icon>clear</mat-icon></button>
-          </p>
-          <mat-divider></mat-divider>
-          <p> Total - {{total | currency}}</p>
-          <button mat-button class="cart example-full-width" [disabled]="cart.length == 0" (click)=openPurchaseDialog(product.key)>Purchase</button>
-      </div>
-    </mat-grid-tile>
+   
   </div>
 </mat-grid-list>
 <div class="title">

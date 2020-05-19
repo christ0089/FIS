@@ -1,5 +1,5 @@
-<div class="container">
-  <mat-card class="user">
+<div class="container" >
+  <mat-card class="user" style="margin-left: auto; margin-right: auto">
 
     <div class="image-container" (click)="openGallery('ProfileImg')">
       <img class="image" *ngIf="image !== ''" [src]=image >
@@ -7,56 +7,27 @@
     <mat-progress-bar *ngIf="status == true" mode="indeterminate"></mat-progress-bar>
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
       <mat-form-field>
-        <input matInput placeholder="Url de la imagen" formControlName="photoUrl" id="photoUrl">
+        <input matInput placeholder="Url of the image" formControlName="photoUrl" id="photoUrl">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Nombre" formControlName="firstName" id="firstName">
+        <input matInput placeholder="Name" formControlName="firstName" id="firstName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Apellido" formControlName="lastName" id="lastName">
+        <input matInput placeholder="Last name" formControlName="lastName" id="lastName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Correo electrónico" formControlName="email" id="email" />
+        <input matInput placeholder="Email" formControlName="email" id="email" />
         <mat-error
           *ngIf="!profileForm.get('email').hasError('required') && profileForm.get('email').hasError('invalidEmail')">
-          El email debe contener <strong>@itesm.mx o @tec.mx</strong>
+          Email must contain <strong>@itesm.mx or @tec.mx</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input type="number" matInput placeholder="Número de celular" formControlName="cellPhone" id="cellPhone">
+        <input type="number" matInput placeholder="Phone number" formControlName="cellPhone" id="cellPhone">
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary">Actualizar cuenta</button>
+      <button type="submit" mat-raised-button style="background-color: #00C4CC; color: white;">Actualizar cuenta</button>
     </form>
   </mat-card>
-  <div class="data" *ngIf="products$ | async; let products">
-    <mat-card>
-      <mat-card-title>Tus productos</mat-card-title>
-    </mat-card>
-    <mat-card class="product-card" *ngFor="let product of products">
-      <div class="image-card-container">
-        <img mat-card-image class="image" src="{{product.image}}" alt="Photo of a Shiba Inu">
-      </div>
-      <div class="text-container">
-        <mat-card-header>
-          <mat-card-title class="title">{{product.name}} 
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            {{product.description}}
-          </p>
-          <p class="price">
-            Precio: {{product.price | currency}} - <span>Status: {{product.status | status}}</span>
-          </p>
-          <button mat-button (click)="goToPage('products/add',product.key)">Editar</button>
-          <button mat-button (click)="deleteProduct(product.key)">Borrar</button>
-        </mat-card-content>
-      </div>
-    </mat-card>
-    <mat-card>
-      <mat-card-title>Total Vendido : {{total | currency}}</mat-card-title>
-    </mat-card>
-  </div>
 </div>
 
 <input #fileUpload type="file" class="file_upload" accept="image/png, image/jpeg"

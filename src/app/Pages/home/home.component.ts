@@ -26,7 +26,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ]
 })
 export class HomeComponent implements OnInit {
-  categories = ["Menu", "Escuela", "Tienda", "Trabajo"];
+  categories = ["Main Feed", "Workout", "Food", "Memes", "Entertainment"];
   products$: Observable<Product[]>;
   @Input('category') category: number;
   selected = 0;

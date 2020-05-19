@@ -10,27 +10,27 @@
   </button>
 
   <div *ngIf="authService.isLoggedIn">
-    <button mat-button [matMenuTriggerFor]="menu">
+    <button mat-button [matMenuTriggerFor]="menu" style="color:white">
       {{ authService.displayName }}
       <mat-icon class="icon">account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item disabled>
-        Bienvenido
+        Welcome
       </button>
       <button mat-menu-item [routerLink]="['/user/', userId]">
-        Mi perfil
+        My profile
       </button>
       <button mat-menu-item [routerLink]="['/chats']">
-        Conversaciones
+        Conversations
       </button>
       <button mat-menu-item (click)="logOut()">
-        Cerrar sesión
+        Logout
       </button>
     </mat-menu>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
 <button *ngIf="authService.isLoggedIn && !router.url.includes('products/add')" mat-fab class="add-item" [routerLink]="['/products/add']" color="accent">
-  <mat-icon class="add fab-icon">add</mat-icon>
+  <mat-icon class="library_add fab-icon">library_add</mat-icon>
 </button>

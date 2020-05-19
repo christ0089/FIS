@@ -25,8 +25,8 @@ function validateNumber(control: FormControl) {
 })
 export class AddProductComponent implements OnInit {
   addForm: FormGroup;
-  categories = ["Ninguna", "Escuela", "Tienda", "Trabajo"];
-  selected = 'Ninguna';
+  categories = ["None", "Workout", "Food", "Memes", "Entertainment"];
+  selected = 'None';
   image = './assets/Unknown.png';
   update: boolean = false;
   id: string = '';
