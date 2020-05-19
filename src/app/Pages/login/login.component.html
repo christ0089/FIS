@@ -1,6 +1,6 @@
 <mat-card class="form-container">
 <a [routerLink]="['/']">
-  <img src="../../../assets/logo-original.png" alt="logo" class="logo">
+  <img src="../../../assets/logo_quarantime.png" alt="logo" class="logo">
 </a>
   <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
@@ -23,7 +23,7 @@
         id="password"
       >
     </mat-form-field>
-    <button type=submit mat-raised-button color="primary">Iniciar Sesión</button>
+    <button type=submit mat-raised-button>Iniciar Sesión</button>
     <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/signup']">¿No tienes cuenta? Regístrate</a>
   </form>
 </mat-card>

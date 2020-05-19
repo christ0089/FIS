@@ -8,10 +8,12 @@
     <mat-grid-tile [colspan]="1" [rowspan]="2">
       <div class="header">
         <h1>{{product.name}} <span *ngIf='product.status == 1'>- {{product.status | status}}</span></h1>
-        <p>{{product.price | currency }}</p>
 
         <button mat-button class="cart example-full-width" [disabled]='product.status == 0' (click)=addToCart(product)>Add to Cart</button>
-        <button mat-button class="example-full-width"  (click)="goToPage('chats', product.owner)">Conversar</button>
+        <mat-card-actions style="margin: auto;">
+          <button mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">EN FAVORITOS</span><span *ngIf="product.favorite != true">AGREGAR EN FAVORITOS</span></button>
+        </mat-card-actions>
+        <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner)">Chat</button>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1"  [rowspan]="2" class="cart_header" *ngIf="cart$ | async; let cart">
@@ -28,7 +30,7 @@
   </div>
 </mat-grid-list>
 <div class="title">
-    <h1>Otros Products</h1>
+    <h1>Other Posts</h1>
     <mat-divider></mat-divider>
 </div>
 

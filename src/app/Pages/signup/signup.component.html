@@ -1,6 +1,6 @@
 <mat-card class="form-container">
   <a [routerLink]="['/']">
-    <img src="../../../assets/logo-original.png" alt="logo" class="logo">
+    <img src="../../../assets/logo_quarantime.png" alt="logo" class="logo">
   </a>
 
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -22,7 +22,7 @@
     <mat-form-field>
       <input type="password" matInput placeholder="Repita la contraseña" formControlName="password2" id="password2">
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Crear cuenta</button>
+    <button type="submit" mat-raised-button>Crear cuenta</button>
     <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
   </form>
 </mat-card>

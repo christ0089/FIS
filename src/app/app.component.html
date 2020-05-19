@@ -1,12 +1,12 @@
-<mat-toolbar class="fix" color="primary">
+<mat-toolbar class="fix">
   <a [routerLink]="['/']">
-    <img src="../assets/logo-white.png" class="logo" alt="Logo">
+    <img src="../assets/inline_logo.png" class="logo" alt="Logo">
   </a>
   <span style="flex: 1 1 auto;"></span>
 
-  <button mat-button *ngIf="!authService.isLoggedIn" [routerLink]="['/login']">
-    Login
-    <mat-icon class="icon">account_circle</mat-icon>
+  <button mat-button *ngIf="!authService.isLoggedIn" [routerLink]="['/login']" style="color: white;">
+    
+    <mat-icon class="icon" style="color: white;">account_circle</mat-icon>
   </button>
 
   <div *ngIf="authService.isLoggedIn">
