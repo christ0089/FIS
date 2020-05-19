@@ -6,24 +6,24 @@
     <mat-form-field>
       <input
         matInput
-        placeholder="Correo Electrónico"
+        placeholder="Email"
         formControlName="email"
         id="email"
       >
       <mat-error *ngIf="!authForm.get('email').hasError('required') && authForm.get('email').hasError('invalidEmail')">
-        El email debe contener <strong>@itesm.mx o @tec.mx</strong>
+        Email must contain <strong>@itesm.mx or @tec.mx</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
         type="password"
         matInput
-        placeholder="Contraseña"
+        placeholder="Password"
         formControlName="password"
         id="password"
       >
     </mat-form-field>
-    <button type=submit mat-raised-button>Iniciar Sesión</button>
-    <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/signup']">¿No tienes cuenta? Regístrate</a>
+    <button type=submit mat-raised-button>Login</button>
+    <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/signup']">Don't have an account? Register now!</a>
   </form>
 </mat-card>
