@@ -12,6 +12,7 @@
       <mat-card-header (click)="goToPage('products', product.key)">
         <div mat-card-avatar></div>
         <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>Posted by: //Aquí estaría cool sacar el nombre del usuario.//</mat-card-subtitle>
       </mat-card-header>
       <img class="image" mat-card-image src="{{ product.image }}" alt="Photo of a Shiba Inu" (click)="goToPage('products', product.key)">
       <mat-card-content (click)="goToPage('products', product.key)">
