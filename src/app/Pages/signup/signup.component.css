@@ -20,7 +20,11 @@ form {
 
 .logo {
   margin-left: auto !important;
-  width: 300px;
+  width: 200px;
   margin-right: auto;
   display: block;
+}
+button{
+  background-color: #00C4CC;
+  color: white;
 }

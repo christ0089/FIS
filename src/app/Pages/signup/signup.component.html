@@ -1,28 +1,28 @@
 <mat-card class="form-container">
   <a [routerLink]="['/']">
-    <img src="../../../assets/logo-original.png" alt="logo" class="logo">
+    <img src="../../../assets/logo_quarantime.png" alt="logo" class="logo">
   </a>
 
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <input matInput placeholder="Nombre" formControlName="firstName" id="firstName">
+      <input matInput placeholder="Name" formControlName="firstName" id="firstName">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Apellido" formControlName="lastName" id="lastName">
+      <input matInput placeholder="Last Name" formControlName="lastName" id="lastName">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Correo electrónico" formControlName="email" id="email" />
+      <input matInput placeholder="Email" formControlName="email" id="email" />
       <mat-error *ngIf="!signupForm.get('email').hasError('required') && signupForm.get('email').hasError('invalidEmail')">
-        El email debe contener <strong>@itesm.mx o @tec.mx</strong>
+       The email must contain <strong>@itesm.mx or @tec.mx</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input type="password" matInput placeholder="Contraseña" formControlName="password" id="password">
+      <input type="password" matInput placeholder="Password" formControlName="password" id="password">
     </mat-form-field>
     <mat-form-field>
-      <input type="password" matInput placeholder="Repita la contraseña" formControlName="password2" id="password2">
+      <input type="password" matInput placeholder="Repeat password" formControlName="password2" id="password2">
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Crear cuenta</button>
-    <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/login']">¿Ya tienes cuenta? Inicia sesión</a>
+    <button type="submit" mat-raised-button>Create account</button>
+    <a mat-button color="primary" class="auth-change" color="accent" [routerLink]="['/login']">Already have an account? Log in</a>
   </form>
 </mat-card>

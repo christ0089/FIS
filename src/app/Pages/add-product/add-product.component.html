@@ -1,36 +1,27 @@
 <mat-card class="form-container">
-  <mat-card-title>Añade un nuevo producto</mat-card-title>
-  <button class="imageButton" (click)="openGallery('ProfileImg')">
+  <mat-card-title style="text-align: center">Write a post!</mat-card-title>
+  <button class="imageButton" placeholder="Select an image" (click)="openGallery('ProfileImg')">
     <img mat-avatar  *ngIf="image === ''" src={{image}} class='profilePic'>
     <img mat-avatar *ngIf="image !== ''" [src]=image class='profilePic'>
   </button>
   <mat-progress-bar *ngIf="status == true" mode="indeterminate"></mat-progress-bar>
   <form [formGroup]="addForm">
+    <p style="text-align: center;">To select an image click on the image box</p>
     <mat-form-field>
-      <input matInput placeholder="Nombre" formControlName="name" id="name">
+      <input matInput placeholder="Title" formControlName="name" id="name">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Description" formControlName="description" id="description">
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Categoría</mat-label>
+      <mat-label>Select a tag</mat-label>
       <mat-select [(value)]="selected">
         <mat-option *ngFor="let category of categories" value="{{category}}">
           {{category}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Imagen" formControlName="image" id="image" />
-    </mat-form-field>
-    <mat-form-field>
-      <span matPrefix>$ &nbsp;</span>
-      <input matInput placeholder="Precio" formControlName="price" id="price" />
-      <mat-error *ngIf="!addForm.get('price').hasError('required') || addForm.get('price').hasError('invalidNumber')">
-        No puede usar characteres solo numeros
-      </mat-error>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Añadir producto</button>
+    <button type="submit" mat-raised-button style="background-color: #00C4CC; color: white;" (click)="onSubmit()">Post</button>
   </form>
   <input #fileUpload type="file" class="file_upload" accept="image/png, image/jpeg"
     (change)="addToDocument($event.target.files)" />

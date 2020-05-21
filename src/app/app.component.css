@@ -1,9 +1,9 @@
 .logo {
-  width: 200px;
+  width: 155px;
 }
 
 .icon {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .fix {
@@ -23,4 +23,7 @@
   margin-bottom: auto;
   margin-top: auto;
   display: block;
+}
+mat-toolbar{
+  background-color: #00C4CC;
 }
