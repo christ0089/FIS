@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,14 @@ export class AuthService {
   displayName = '';
 
   constructor(
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    private router: Router
   ) {
     this.getUserData().subscribe(user => {
       if (user && user.uid) {
         this.displayName = user.displayName;
         this.isLoggedIn = true;
+        this.router.navigate(['/home']);
       } else {
         this.isLoggedIn = false;
       }

@@ -76,8 +76,8 @@ const appRoutes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'chats',
@@ -91,7 +91,7 @@ const appRoutes: Routes = [
     path: 'signup',
     component: SignupComponent
   },
-  { path: '**', component: HomeComponent },
+  { path: '**', component: LoginComponent },
 ];
 @NgModule({
   declarations: [

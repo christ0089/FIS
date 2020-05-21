@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       try {
         const credentials = this.authForm.value;
         await this.authService.logIn(credentials);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         this.snackbar.open('Bienvenido de nuevo', 'Cerrar', { duration: 2500 });
       } catch (err) {
         this.snackbar.open(err, 'Cerrar', { duration: 2500 });
