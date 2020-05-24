@@ -3,14 +3,14 @@
   <mat-grid-tile [colspan]="4" [rowspan]="4">
     <img src="{{product.image}}" alt="Photo of a Shiba Inu">
   </mat-grid-tile>
-  <div class="row">
+  <div layout="row" layout-align="center center">
 
-    <mat-grid-tile style="align-self: center;" [colspan]="3" [rowspan]="4">
-      <div class="header">
-        <h1>{{product.name}} <span *ngIf='product.status == 1'>- {{product.status | status}}</span></h1>
+    <mat-grid-tile [colspan]="3" [rowspan]="4">
+      <div class="header" style="margin-top: 10px;">
+        <h1 style="text-align: center;">{{product.name}}</h1>
         <p style="color: black;">{{product.description}}</p>
-        <mat-card-actions style="margin: auto;" >
-          <button  style="background-color: #dfdddd" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
+        <mat-card-actions>
+          <button  style="background-color: #dfdddd;" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
         </mat-card-actions>
         <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner)">Chat</button>
       </div>

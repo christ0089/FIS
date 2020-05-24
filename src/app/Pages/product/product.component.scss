@@ -46,9 +46,19 @@ mat-grid-tile {
     font-family: 'Roboto';
     padding: 15px;
 }
-
-
-
+mat-card-actions {
+    align-items: center;
+}
+mat-card-actions button{
+    
+    font-size: 20px;;
+}
+button{
+    font-size: 26px;
+}
+.example-full-width{
+    width:75%;
+}
 app-product {
     background: lightgray;
 }

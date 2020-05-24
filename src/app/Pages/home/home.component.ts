@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit {
   products$: Observable<Product[]>;
   @Input('category') category: number;
   selected = 0;
+
   constructor(
     public productService: ProductService,
     private cartService: CartService,
     private router: Router
   ) {
     this.products$ = productService.getProducts();
-
   }
 
   ngOnInit() {

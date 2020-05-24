@@ -38,7 +38,7 @@ export class User implements User {
         return this._profileImg;
     }
 
-    getName(name: string) {
+    getName(): string {
         return this._name;
     }
 

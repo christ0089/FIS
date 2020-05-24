@@ -13,9 +13,11 @@ export class Product implements IProduct {
     status: ProductStatus;
     user: User;
     favorite = false;
+
     constructor() {
 
     }
+
     setPrice(price: number) {
         this.price = price;
     }
@@ -71,8 +73,8 @@ export class Product implements IProduct {
         return this.owner;
     }
 
-    getUser(user: User) {
-        return user;
+    getUser(): User {
+        return this.user;
     }
 
 }

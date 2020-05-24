@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class AuthService {
 
   constructor(
     public afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private router: Router
   ) {
     this.getUserData().subscribe(user => {
@@ -41,10 +44,13 @@ export class AuthService {
   }
 
   signUp = async ({ email, password, firstName, lastName }) => {
-    await this.afAuth.auth.createUserWithEmailAndPassword(
+    const response = await this.afAuth.auth.createUserWithEmailAndPassword(
       email,
       password
     );
+    console.log(response);
+    const uid = response.user.uid;
+    await this.db.database.ref(`users/${uid}`).set({displayName: `${firstName} ${lastName}`, email});
     this.displayName = `${firstName} ${lastName}`;
     await this.afAuth.auth.currentUser.updateProfile({
       displayName: this.displayName,
