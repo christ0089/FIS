@@ -9,7 +9,7 @@ export class Product implements IProduct {
     coverImg: string;
     key: string = '';
     category: string;
-    owner: string = '';
+    owner: any;
     status: ProductStatus;
     user: User;
     favorite = false;
@@ -69,7 +69,7 @@ export class Product implements IProduct {
         return this.key;
     }
 
-    getOwner(): string {
+    getOwner(): User {
         return this.owner;
     }
 

@@ -36,7 +36,7 @@ export class AddProductComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dataRouter: ActivatedRoute,
     private camera: PostPicture,
-    private auth: AuthService) {   
+    private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -44,9 +44,9 @@ export class AddProductComponent implements OnInit {
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       image: new FormControl('', Validators.required),
-      price: new FormControl('', [Validators.required, validateNumber])
+      // price: new FormControl('', [Validators.required, validateNumber])
     });
-    if (this.dataRouter.snapshot.params['key'] !== null) {
+    if (this.dataRouter.snapshot.params['key'] !== undefined) {
       this.db.database.ref('products').child(JSON.parse(this.dataRouter.snapshot.params['key'])).once('value').then((data) => {
         this.addForm.get("name").setValue(data.val().name);
         this.addForm.get("price").setValue(data.val().price);
@@ -56,6 +56,8 @@ export class AddProductComponent implements OnInit {
         this.selected = data.val().category;
         this.update = true;
         this.id = JSON.parse(this.dataRouter.snapshot.params['key']);
+      }).catch(e => {
+        console.log(e);
       });
     }
   }
@@ -63,8 +65,13 @@ export class AddProductComponent implements OnInit {
   onSubmit = () => {
     if (this.addForm.valid) {
       const product = this.addForm.value as Product;
-      const key = this.auth.getCurrentUser().uid;
-      product.owner = key;
+
+      product.owner = {
+        email: this.auth.afAuth.auth.currentUser.email,
+        name: this.auth.afAuth.auth.currentUser.displayName,
+        key: this.auth.afAuth.auth.currentUser.uid
+      };
+      
       product.category = this.selected;
       product.status = ProductStatus.PENDING;
       if (this.update === true) {

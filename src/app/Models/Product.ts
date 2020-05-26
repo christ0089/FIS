@@ -1,4 +1,5 @@
 import { ProductStatus } from "../Enums/ProductStatus";
+import { User } from "../Class /User";
 
 export interface IProduct {
     name: string;
@@ -7,5 +8,5 @@ export interface IProduct {
     key: string;
     status: ProductStatus;
     favorite: boolean;
-    owner: string;
+    owner: any;
 }

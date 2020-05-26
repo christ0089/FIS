@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { User } from '../Class /User';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -11,21 +13,29 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class AuthService {
   isLoggedIn = false;
   displayName = '';
-
+  currentUser: any;
   constructor(
     public afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private router: Router
   ) {
     this.getUserData().subscribe(user => {
-      if (user && user.uid) {
-        this.displayName = user.displayName;
-        this.isLoggedIn = true;
-        this.router.navigate(['/home']);
-      } else {
-        this.isLoggedIn = false;
-      }
+      this.logService(user);
     });
+  }
+
+  logService(user) {
+    if (user && user.uid) {
+      this.displayName = user.displayName;
+      this.isLoggedIn = true;
+      this.router.navigate(['/home']);
+      this.getUser(user.uid).toPromise().then((userData) => {
+        console.log(userData);
+        this.currentUser = userData;
+      });
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   getUserData() {
@@ -41,6 +51,10 @@ export class AuthService {
 
   getCurrentUser() {
     return this.afAuth.auth.currentUser;
+  }
+
+  getUser(uid): Observable<any> {
+    return this.db.object<any>(`users/${uid}`).valueChanges();
   }
 
   signUp = async ({ email, password, firstName, lastName }) => {
