@@ -66,6 +66,7 @@ export class AuthService {
     const uid = response.user.uid;
     await this.db.database.ref(`users/${uid}`).set({displayName: `${firstName} ${lastName}`, email});
     this.displayName = `${firstName} ${lastName}`;
+    await  this.afAuth.auth.currentUser.sendEmailVerification();
     await this.afAuth.auth.currentUser.updateProfile({
       displayName: this.displayName,
       photoURL: ''
