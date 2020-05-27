@@ -1,74 +1,90 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MessageService } from 'src/app/Services/message.service';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/Services/auth_service';
-import { DatePipe} from '@angular/common';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { MessageService } from "src/app/Services/message.service";
+import { ActivatedRoute } from "@angular/router";
+import { AuthService } from "src/app/Services/auth_service";
+import { DatePipe } from "@angular/common";
+import { trigger, transition, style, animate } from "@angular/animations";
+import { tap, take } from "rxjs/operators";
 
 @Component({
-  selector: 'app-chats',
-  templateUrl: './chats.component.html',
-  styleUrls: ['./chats.component.scss'],
+  selector: "app-chats",
+  templateUrl: "./chats.component.html",
+  styleUrls: ["./chats.component.scss"],
   animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
+    trigger("fadeIn", [
+      transition(":enter", [
         style({
-          opacity: '0',
+          opacity: "0",
         }),
-        animate('.3s ease-in')
-      ])
+        animate(".3s ease-in"),
+      ]),
     ]),
-  ]
+  ],
 })
 export class ChatsComponent implements OnInit {
   conversation$: Observable<any[]>;
   messages$: Observable<any[]>;
-  id: string = '';
-  selectedConv: string = '';
-  message: string = '';
-  constructor(private message_service: MessageService,
+  id: string = "";
+  selectedConv: string = "";
+  message: string = "";
+  constructor(
+    private message_service: MessageService,
     private auth: AuthService,
-    private dataRouter: ActivatedRoute) {
+    private dataRouter: ActivatedRoute
+  ) {
     this.id = this.auth.getCurrentUser().uid;
-
   }
 
   ngOnInit() {
     this.conversation$ = this.message_service.getConversations(this.id);
-    if (JSON.parse(this.dataRouter.snapshot.params['key']) !== null) {
+    if (JSON.parse(this.dataRouter.snapshot.params["key"]) !== null) {
+      const key = JSON.parse(this.dataRouter.snapshot.params["key"]);
+  
+      this.conversation$
+        .pipe(
+          take(1),
+          tap((conversations) => {
+            const exists = conversations.filter(function (o) {
+              return o.key === key;
+            });
 
-      const key = JSON.parse(this.dataRouter.snapshot.params['key']);
-
-      this.conversation$.toPromise().then((conversations) => {
-        conversations.forEach(element => {
-          console.log(element);
-          if (element.key === key) {
-            this.messages$ = this.message_service.getMessages(element.convID);
-            return;
-          }
-        });
-      });
-      const messageObj = {
-        message: "Hola",
-        sender: this.auth.getCurrentUser().uid,
-        timestamp: Date.now(),
-      }
-      this.message_service.postConversation(key, this.id, messageObj).then((convID) => {
-        this.messages$ = this.message_service.getMessages(convID);
-      });
+            if (exists.length == 0) {
+              const messageObj = {
+                message: "Hola",
+                sender: this.auth.getCurrentUser().uid,
+                timestamp: Date.now(),
+              };
+              this.message_service
+                .postConversation(key, this.id, messageObj)
+                .then((convID) => {
+                  this.messages$ = this.message_service.getMessages(convID);
+                });
+            } else {
+              console.log(exists[0].convID)
+              this.messages$ = this.message_service.getMessages(exists[0].convID);
+            }
+          })
+        )
+        .subscribe();
     } else {
-      this.conversation$.toPromise().then((conversations) => {
-        if (conversations !== null) {
-          this.messages$ = this.message_service.getMessages(conversations[0].convID);
-        }
-      });
+      this.conversation$
+      .pipe(
+        take(1),
+        tap((conversations) => {
+          if (conversations !== null) {
+            this.messages$ = this.message_service.getMessages(
+              conversations[0].convID
+            );
+          }
+        })
+      )
+      .subscribe();
     }
   }
 
-
   getMessages(id) {
-    this.selectedConv = id
+    this.selectedConv = id;
     this.messages$ = this.message_service.getMessages(this.selectedConv);
   }
 
@@ -77,11 +93,10 @@ export class ChatsComponent implements OnInit {
       message: this.message,
       sender: this.auth.getCurrentUser().uid,
       timestamp: Date.now(),
-    }
-    if(this.message) {
+    };
+    if (this.message) {
       this.message_service.postMessages(this.selectedConv, messageObj);
-      this.message = '';
+      this.message = "";
     }
   }
-
 }

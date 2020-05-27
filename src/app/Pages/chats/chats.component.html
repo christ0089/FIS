@@ -2,7 +2,7 @@
   <mat-drawer #drawer class="sidebar" mode="side" opened>
     <mat-nav-list [@fadeIn] *ngIf="conversation$ | async; let conversations; else emptyConversations">
       <mat-list-item *ngFor="let conversation of conversations" (click)="getMessages(conversation.convID)">
-        <h4 mat-line>{{conversation.convID}}</h4>
+        <h4 mat-line *ngIf="('users/' +  conversation.key | doc | async); let user; else error">{{user.displayName}}</h4>
         <p mat-line>{{conversation.timestamp | date}}</p>
       </mat-list-item>
     </mat-nav-list>

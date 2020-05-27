@@ -11,7 +11,7 @@
       <div class="header" style="margin-top: 10px;">
         <h1 style="text-align: center;">{{product.name}}</h1>
         <p style="color: black;">{{product.description}}</p>
-        <mat-card-actions>
+        <mat-card-actions style="text-align: center;">
           <button  style="background-color: #dfdddd; text-align: center;" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite, i)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
         </mat-card-actions>
         <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner.key)">Chat</button>
@@ -25,4 +25,4 @@
     <mat-divider></mat-divider>
 </div>
 
-<product-list (data)="goToPage('products', $event)"></product-list>
+<product-list (data)="goToPage('posts', $event)"></product-list>

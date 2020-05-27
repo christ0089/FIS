@@ -54,6 +54,7 @@ import { PurchaseComponent } from './Pages/product/purchace.component';
 import { PostPicture } from './Services/post-picture';
 import { HttpClientModule } from '@angular/common/http';
 import { StatusPipe } from './Pipes/status';
+import { DocPipe } from './Pipes/doc';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
@@ -65,7 +66,7 @@ export const firebaseConfig = {
 };
 
 const appRoutes: Routes = [
-  { path: 'products', children: [
+  { path: 'posts', children: [
     { path: '', component: HomeComponent },
     { path: 'add', component: AddProductComponent } ,
     { path: 'add/:key', component: AddProductComponent } ,
@@ -103,6 +104,7 @@ const appRoutes: Routes = [
     LoginComponent,
     SignupComponent,
     StatusPipe,
+    DocPipe,
     AddProductComponent,
     ChatsComponent,
     PurchaseComponent
