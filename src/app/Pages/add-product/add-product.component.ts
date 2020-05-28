@@ -100,7 +100,7 @@ export class AddProductComponent implements OnInit {
           .then(() => {
             this.status = false;
             this.snackBar.open("Success", "Continue");
-            this.ngOnInit();
+            this.router.navigate(["/home"]);
           });
       } else {
         this.db.database
@@ -109,7 +109,7 @@ export class AddProductComponent implements OnInit {
           .then(() => {
             this.status = false;
             this.snackBar.open("Success", "Continue");
-            this.router.navigate(["post", JSON.stringify(product.key)]);
+            this.router.navigate(["/home"]);
           });
       }
     } else {
