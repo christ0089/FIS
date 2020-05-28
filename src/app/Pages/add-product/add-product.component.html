@@ -22,7 +22,7 @@
       </mat-select>
     </mat-form-field>
     <button type="submit" mat-raised-button style="background-color: #00C4CC; color: white; font-size: 20px;" (click)="onSubmit()">Post</button>
-    <button *ngIf="update == true" mat-raised-button color='warn' (click)="delete()" style="font-size: 20px; margin-top: 30px;">Eliminar</button>
+    <button *ngIf="update == true" mat-raised-button color='warn' (click)="delete()" style="font-size: 20px; margin-top: 30px;">Delete</button>
   </form>
   <input #fileUpload type="file" class="file_upload" accept="image/png, image/jpeg"
     (change)="addToDocument($event.target.files)" />
