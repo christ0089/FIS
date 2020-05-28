@@ -13,7 +13,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
   isLoggedIn = false;
   displayName = '';
-  currentUser: any;
+  currentUser: firebase.User;
+
   constructor(
     public afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
@@ -29,10 +30,11 @@ export class AuthService {
       this.displayName = user.displayName;
       this.isLoggedIn = true;
       this.router.navigate(['/home']);
-      this.getUser(user.uid).toPromise().then((userData) => {
-        console.log(userData);
-        this.currentUser = userData;
-      });
+      this.currentUser = user;
+      // this.getUser(user.uid).toPromise().then((userData) => {
+      //   console.log(userData);
+      
+      // });
     } else {
       this.isLoggedIn = false;
     }

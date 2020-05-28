@@ -30,7 +30,9 @@ export class ProductComponent implements OnInit {
     private auth: AuthService,
     private database: AngularFireDatabase,
     private dataRoute: ActivatedRoute
-  ) {}
+  ) {
+    console.log(this.auth.currentUser)
+  }
 
   ngOnInit() {
     this.dataRoute.params.subscribe((data) => {

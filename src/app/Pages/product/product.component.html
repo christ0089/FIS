@@ -10,10 +10,10 @@
     <mat-grid-tile [colspan]="2" [rowspan]="4">
       <div class="header" style="margin-top: 10px;">
         <h1 style="text-align: center;">{{product.name}}</h1>
-        <p style="color: black;">{{product.description}}</p>
+        <p style="color: black; padding: 0px 20px; text-align: center;">{{product.description}}</p>
         <mat-card-actions style="text-align: center;">
           <button style="background-color: #dfdddd;" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
-          <button color='accent' mat-button class="example-full-width"  (click)="goToPage('posts/add', product.key)">Editar</button>
+          <button color='accent' mat-button class="example-full-width"  *ngIf="product.owner.key == auth.currentUser.uid" (click)="goToPage('posts/add', product.key)">Editar</button>
         </mat-card-actions>
         <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner.key)">Chat</button>
       </div>
