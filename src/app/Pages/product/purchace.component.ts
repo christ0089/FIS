@@ -46,6 +46,11 @@ export class PurchaseComponent {
             this.snackBar.open('Algo esta mal', 'Verfique');
         }
     }
+
+    setAsFavorite(product, indx) {
+
+    }
+
     onNoClick() {
         this.dialogRef.close({ success: false });
     }
