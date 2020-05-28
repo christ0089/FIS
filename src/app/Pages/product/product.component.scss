@@ -5,7 +5,7 @@ img {
 }
 .header {
     width: 100%;
-    padding: 15px;
+    margin-top: 0px;
     p {
         color: green;
     }
@@ -57,8 +57,11 @@ button{
     font-size: 26px;
 }
 .example-full-width{
-    width:75%;
+    width:100%;
 }
 app-product {
     background: lightgray;
+}
+.mat-card-actions .mat-button{
+    margin-bottom: 30px;;
 }
