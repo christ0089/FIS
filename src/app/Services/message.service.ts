@@ -32,14 +32,31 @@ export class MessageService {
   }
 
   postConversation(productID:string,id, message: any) {
-    const convID:string = Date.now().toFixed(0);
-    console.log(productID);
-    const ref = this.db.database.ref(`conversations/${id}/${productID}`).set({ timestamp: -1 * Date.now(), convID: convID});
-    const ref2 = this.db.database.ref(`conversations/${productID}/${id}`).set({ timestamp: -1 * Date.now(), convID: convID});
+    const convID : string = Date.now().toFixed(0);
+    const conversation = {
+      time : this.getTimeStamp(),
+      timestamp: -1 * Date.now(),
+      convID: convID
+    };
+
+    const ref = this.db.database.ref(`conversations/${id}/${productID}`).set(conversation);
+    const ref2 = this.db.database.ref(`conversations/${productID}/${id}`).set(conversation);
     const message_promise = this.postMessages(convID, message);
     return Promise.all([ref, ref2, message_promise]).then(() => {
       return convID;
     });
+  }
+
+  getTimeStamp() {
+    const now = new Date();
+    const date = now.getUTCFullYear() + '/' +
+                 (now.getUTCMonth() + 1) + '/' +
+                 now.getUTCDate();
+    const time = now.getUTCHours() + ':' +
+                 now.getUTCMinutes() + ':' +
+                 now.getUTCSeconds();
+
+    return (date + ' ' + time);
   }
 
 

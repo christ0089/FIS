@@ -55,6 +55,7 @@ import { PostPicture } from './Services/post-picture';
 import { HttpClientModule } from '@angular/common/http';
 import { StatusPipe } from './Pipes/status';
 import { DocPipe } from './Pipes/doc';
+import { DateFixPipe } from './Pipes/doc copy';
 
 
 export const firebaseConfig = {
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
     SignupComponent,
     StatusPipe,
     DocPipe,
+    DateFixPipe,
     AddProductComponent,
     ChatsComponent,
     PurchaseComponent

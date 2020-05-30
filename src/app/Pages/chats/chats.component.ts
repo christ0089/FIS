@@ -38,9 +38,10 @@ export class ChatsComponent implements OnInit {
 
   ngOnInit() {
     this.conversation$ = this.message_service.getConversations(this.id);
-    if (JSON.parse(this.dataRouter.snapshot.params["key"]) !== null) {
-      const key = JSON.parse(this.dataRouter.snapshot.params["key"]);
-  
+    const data = this.dataRouter.snapshot.params;
+    
+    if (Object.entries(data).length !== 0) {
+      const key = JSON.parse(data["key"]);
       this.conversation$
         .pipe(
           take(1),
@@ -58,11 +59,10 @@ export class ChatsComponent implements OnInit {
               this.message_service
                 .postConversation(key, this.id, messageObj)
                 .then((convID) => {
-                  this.messages$ = this.message_service.getMessages(convID);
+                  this.getMessages(convID);
                 });
             } else {
-              console.log(exists[0].convID)
-              this.messages$ = this.message_service.getMessages(exists[0].convID);
+              this.getMessages(exists[0].convID);
             }
           })
         )
@@ -72,10 +72,9 @@ export class ChatsComponent implements OnInit {
       .pipe(
         take(1),
         tap((conversations) => {
+          console.log(conversations);
           if (conversations !== null) {
-            this.messages$ = this.message_service.getMessages(
-              conversations[0].convID
-            );
+            this.getMessages(conversations[0].convID);
           }
         })
       )
