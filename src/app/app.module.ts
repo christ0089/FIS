@@ -56,6 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StatusPipe } from './Pipes/status';
 import { DocPipe } from './Pipes/doc';
 
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyAL6_mZ12vpDGb_ZmahBqlX3PSYzA_6JGs',
   authDomain: 'soft-eng-d42c8.firebaseapp.com',
@@ -149,6 +150,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [DataProvider, PostPicture,AuthService],
   bootstrap: [AppComponent],

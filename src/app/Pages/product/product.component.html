@@ -1,5 +1,5 @@
 <mat-grid-list cols="4" rows="3" style="margin: 15px 50px" gutterSize="10px" rowHeight="100px"
-  *ngIf="product$ | async; let product">
+ [@fadeIn] *ngIf="product$ | async; let product">
   <mat-grid-tile [colspan]="4" [rowspan]="4">
     <img src="{{product.image}}" alt="Photo of a Shiba Inu">
   </mat-grid-tile>
@@ -7,7 +7,7 @@
     <mat-grid-tile [colspan]="1" [rowspan]="4" style="box-shadow:blanchedalmond;" >
       <mat-card-actions style="text-align: center;">
         <button style="background-color: #00C4CC; color: white;" mat-button class="example-full-width"  (click)="goToPage('chats', product.owner.key)">Chat</button>
-        <button style="background-color: #dfdddd;" mat-button  [@fadeIn]   (click)="setAsFavorite(product.favorite)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
+        <button style="background-color: #dfdddd;" mat-button    (click)="setAsFavorite(product.favorite)"><span *ngIf="product.favorite == true">In favorites</span><span *ngIf="product.favorite != true">Add to favorites</span></button>
         <button color='accent' style="background-color:rgb(243, 240, 240);" mat-button class="example-full-width"  *ngIf="product.owner.key == auth.currentUser.uid" (click)="goToPage('posts/add', product.key)">Edit</button>
       </mat-card-actions>
     </mat-grid-tile>

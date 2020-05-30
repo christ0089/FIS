@@ -12,10 +12,21 @@ import { AuthService } from "src/app/Services/auth_service";
 import { ProductStatus } from "src/app/Enums/ProductStatus";
 import { auth } from "firebase";
 import { map, tap } from "rxjs/operators";
+import { trigger, transition, style, animate } from "@angular/animations";
 @Component({
   selector: "app-product",
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.scss"],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({
+          opacity: '0',
+        }),
+        animate('.3s ease-in')
+      ])
+    ]),
+  ]
 })
 export class ProductComponent implements OnInit {
   product$: Observable<Product>;
@@ -46,7 +57,7 @@ export class ProductComponent implements OnInit {
   setAsFavorite(value: boolean, idx: number) {
     this.product$ = this.product$.pipe(
       tap((product) => {
-        product.favorite = value === true ? false : true;
+        product.favorite = !product.favorite;
         return product;
       })
     );
