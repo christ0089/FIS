@@ -1,6 +1,6 @@
 # TerceraMano.com
 
-<img src="./src/assets/logo-original.png" width="320" alt="logo"/>
+<img src="./src/assets/logo_quarentime.png" width="320" alt="logo"/>
 
 # Demo completo
 
